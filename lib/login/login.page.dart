@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: FlatButton(
                                           onPressed: () {
                                             Navigator.pushNamed(
-                                                context, "cadastroUsuario");
+                                                context, "register");
                                           },
                                           child: Text(
                                             "Cadastrar-se",
@@ -292,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                               MaterialButton(
                                 minWidth: 40,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, "autenticar");
+                                  Navigator.pushNamed(context, "register");
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

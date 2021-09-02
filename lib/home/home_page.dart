@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> with Disposable {
                                       children: <Widget>[
                                         CircleAvatar(
                                           radius: 55,
-                                          backgroundColor: Color(0xFF2D9ABA),
+                                          backgroundColor: Color(0xFF4F574F),
                                           child: homeController.user != null &&
                                                   homeController.user.pessoa !=
                                                       null &&

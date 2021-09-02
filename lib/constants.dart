@@ -17,10 +17,10 @@ const List<Color> botaoDesativado = [Color(0xFF9BA1A0), Color(0xFF4F574F)];
 
 const List<Color> gradientColorContainer = [
   Color(0xFF243646),
-  Color(0xFF26434A)
+  Color(0xFF263A4A)
 ];
 
 const Color primaryColor = Color(0xFFF36C2B);
 const Color secundaryColor = Color(0xFF243646);
-const Color lightBlue = Color(0xFF26434A);
+const Color lightBlue = Color(0xFF263A4A);
 const Color backgroundColor = Color(0xffe7e7e7);

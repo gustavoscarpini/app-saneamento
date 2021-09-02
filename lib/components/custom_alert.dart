@@ -18,7 +18,9 @@ abstract class CustomAlert {
               decoration: BoxDecoration(
                   color: style == AlertStyle.error
                       ? Colors.redAccent
-                      : Colors.blueAccent,
+                      : style == AlertStyle.warning
+                          ? Colors.deepOrange
+                          : Colors.blueAccent,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(5),
                       topRight: Radius.circular(5))),
@@ -79,4 +81,4 @@ abstract class CustomAlert {
   }
 }
 
-enum AlertStyle { success, error, confirm, loading }
+enum AlertStyle { success, error, warning, confirm, loading }

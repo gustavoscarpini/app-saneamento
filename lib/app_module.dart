@@ -3,6 +3,7 @@ import 'package:appcontribuinte/dio/custom_dio.dart';
 import 'package:appcontribuinte/home/home_module.dart';
 import 'package:appcontribuinte/login/login_module.dart';
 import 'package:appcontribuinte/login/login_repository.dart';
+import 'package:appcontribuinte/register/cadastro_usuario_module.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -27,5 +28,6 @@ class AppModule extends MainModule {
         ModularRouter('/login', module: LoginModule()),
         ModularRouter('/home', module: HomeModule()),
         ModularRouter('/configuracao', module: ConfigModule()),
+        ModularRouter('/register', module: CadastroUsuarioModule()),
       ];
 }

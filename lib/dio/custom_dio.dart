@@ -26,9 +26,11 @@ class CustomDio {
           var token = Token.fromJson(json.decode(prefs.getString("token")));
           print("=== TOKEN ${token.accessToken}");
           // Do something before request is sent
-          options.headers["Authorization"] = "Bearer " + token.accessToken;
+          if (token != null &&
+              token.accessToken != null &&
+              token.accessToken.isNotEmpty)
+            options.headers["Authorization"] = "Bearer " + token.accessToken;
         }
-
 
         return options;
       }, onResponse: (Response response) {
