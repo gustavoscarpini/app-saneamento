@@ -16,7 +16,6 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
-        Bind((i) => LoginRepository(client)),
         Bind((i) => client),
       ];
 

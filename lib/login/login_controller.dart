@@ -110,6 +110,14 @@ abstract class _LoginControllerBase extends Disposable with Store {
     return future;
   }
 
+  @action
+  Future redefinirSenha() async {
+    carregando = true;
+    var future = await repo.redefinirSenha(loginController.text);
+    carregando = false;
+    return future;
+  }
+
   @override
   void dispose() {
     usuario = null;
