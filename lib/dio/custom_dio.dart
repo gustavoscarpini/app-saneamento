@@ -9,62 +9,70 @@ import '../../constants.dart';
 
 class CustomDio {
   Dio _dio;
+  final bool usaToken;
 
-  CustomDio() {
+  CustomDio(this.usaToken) {
     if (_dio == null) {
       _dio = Dio();
+      if (usaToken) {
+        _dio.interceptors.clear();
+        _dio.interceptors
+            .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
+          print(
+              "REQUEST[${options.method}] => PATH: ${options.baseUrl}${options.path}");
 
-      _dio.interceptors.clear();
+          SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      _dio.interceptors
-          .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-        print("REQUEST[${options.method}] => PATH: ${options.path}");
-
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        if (prefs.getString("token") != null) {
-          var token = Token.fromJson(json.decode(prefs.getString("token")));
-          print("=== TOKEN ${token.accessToken}");
-          // Do something before request is sent
-          if (token != null &&
-              token.accessToken != null &&
-              token.accessToken.isNotEmpty)
-            options.headers["Authorization"] = "Bearer " + token.accessToken;
-        }
-
-        return options;
-      }, onResponse: (Response response) {
-        print(
-            "RESPONSE: [${response.statusCode}] => PATH: [${response.request.path}] => DATA: [${response.data}]");
-        // Do something with response data
-        return response; // continue
-      }, onError: (DioError error) async {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        print(
-            "ERROR[${error.response?.statusCode}] => PATH: ${error.request.path}"); // Do something with response error
-
-        if (error.response?.statusCode == 401) {
-          Options options = error.response.request;
-          String login = prefs.getString(KEY_USERLOGIN);
-          String senha = prefs.getString(KEY_PASSWORD);
-          print("vai tentar novo login ${login}  ${senha}");
-
-          if (login != null &&
-              login.isNotEmpty &&
-              senha != null &&
-              senha.isNotEmpty) {
-            LoginRepository _loginRepository = LoginRepository(_dio);
-
-            _loginRepository.login(login, senha).then((e) {
-              //repeat
-              return _dio.request(error.response.request.path,
-                  options: options);
-            });
+          if (prefs.getString("token") != null) {
+            print("=== TEM TOKEN");
+            try {
+              var token = Token.fromJson(json.decode(prefs.getString("token")));
+              print("=== TOKEN ${token.accessToken}");
+              // Do something before request is sent
+              if (token != null &&
+                  token.accessToken != null &&
+                  token.accessToken.isNotEmpty)
+                options.headers["Authorization"] =
+                    "Bearer " + token.accessToken;
+            } on DioError catch (e) {
+              print("ERRO AO PEGAR O TOKEN ${e.error}");
+            }
           }
-        }
-        return error;
-      }));
+
+          return options;
+        }, onResponse: (Response response) {
+          print(
+              "RESPONSE: [${response.statusCode}] => PATH: [${response.request.path}] => DATA: [${response.data}]");
+          // Do something with response data
+          return response; // continue
+        }, onError: (DioError error) async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+          print(
+              "ERROR[${error.response?.statusCode}] => PATH: ${error.request.path}"); // Do something with response error
+
+          if (error.response?.statusCode == 401) {
+            Options options = error.response.request;
+            String login = prefs.getString(KEY_USERLOGIN);
+            String senha = prefs.getString(KEY_PASSWORD);
+            print("vai tentar novo login ${login}  ${senha}");
+
+            if (login != null &&
+                login.isNotEmpty &&
+                senha != null &&
+                senha.isNotEmpty) {
+              LoginRepository _loginRepository = LoginRepository(_dio);
+
+              _loginRepository.login(login, senha).then((e) {
+                //repeat
+                return _dio.request(error.response.request.path,
+                    options: options);
+              });
+            }
+          }
+          return error;
+        }));
+      }
       _dio.options.baseUrl = BASE_URL;
       _dio.options.connectTimeout = 50000;
     }

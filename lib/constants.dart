@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-const BASE_URL = "http://192.168.1.102:8081";
+// const BASE_URL = "http://192.168.1.102:8081";
+const BASE_URL = "http://10.0.2.2:8081";
 // const BASE_URL = "https://homologaapi.riobranco.ac.gov.br/";
 const String KEY_USERLOGIN = "userlogin_nfse";
 const String KEY_USERNAME = "username_nfse";

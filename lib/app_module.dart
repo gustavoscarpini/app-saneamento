@@ -12,7 +12,7 @@ import 'app_widget.dart';
 
 class AppModule extends MainModule {
   static Inject get to => Inject<AppModule>.of();
-  Dio client = CustomDio().dio;
+  Dio client = CustomDio(true).dio;
 
   @override
   List<Bind> get binds => [

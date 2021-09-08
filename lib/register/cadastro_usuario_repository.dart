@@ -9,6 +9,7 @@ class CadastroUsuarioRepository {
 
   Future<int> salvarCadastroUsuario(Register register) async {
     try {
+      print("VAI MANDARR ${register.toJson()}");
       var response = await _client.post("/api/criar-usuario-app", data: register);
       return response.statusCode;
     } on DioError catch (e) {

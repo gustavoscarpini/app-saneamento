@@ -153,6 +153,11 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
                       _controllerUsuario.salvarCadastroUsuario().then((value) {
                         if (value == 200) {
                           CustomAlert.show(context,
+                              onConfirm: () {
+                                Navigator.of(context)
+                                    .pushNamed("login", arguments: true)
+                                    .then((value) {});
+                              },
                               title: "Cadastro realizado",
                               subTitle:
                                   "Foi enviado para o seu email a senha temporária para acesso.",

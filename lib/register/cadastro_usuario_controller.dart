@@ -37,17 +37,25 @@ abstract class _CadastroUsuarioControllerBase with Store {
   @action
   bool validarUsuario() {
     if (register.id != null) {
-      if (register.nome.trim().toLowerCase() !=
+      if (register.nome == null || register.nome.trim().toLowerCase() !=
           nomeController.text.trim().toLowerCase()) {
         print("Nome não bate");
         return false;
       }
-      if (register.nomeMae.trim().toLowerCase() !=
+      if (register.nomeMae == null || register.nomeMae.trim().toLowerCase() !=
           nomeMaeController.text.trim().toLowerCase()) {
         print("Nome da mãe não bate");
         return false;
       }
-
+      if (register.email == null || register.email.trim().toLowerCase() !=
+          emailController.text.trim().toLowerCase()) {
+        print("email não bate");
+        return false;
+      }
+      if(register.nascimento == null){
+        print("Nascimento não bate");
+        return false;
+      }
       var dataClient = Util.serverSideFormart
           .format(Util.clientSideformart.parse(nascimentoController.text));
       var dataServer = Util.serverSideFormart.format(register.nascimento);
@@ -59,12 +67,11 @@ abstract class _CadastroUsuarioControllerBase with Store {
     } else {
       register.nascimento =
           Util.clientSideformart.parse(nascimentoController.text);
-
       register.nome = nomeController.text;
       register.nomeMae = nomeMaeController.text;
-      register.cpf = cpfController.text;
       register.email = emailController.text;
     }
+    register.cpf = cpfController.text;
     return true;
   }
 
@@ -91,10 +98,10 @@ abstract class _CadastroUsuarioControllerBase with Store {
   @override
   void dispose() {
     register = null;
-    cpfController.text ="";
-    nomeController.text ="";
-    nomeMaeController.text ="";
-    emailController.text ="";
-    nascimentoController.text ="";
+    cpfController.text = "";
+    nomeController.text = "";
+    nomeMaeController.text = "";
+    emailController.text = "";
+    nascimentoController.text = "";
   }
 }

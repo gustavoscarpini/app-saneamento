@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:appcontribuinte/dio/custom_dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'cadastro_usuario_controller.dart';
@@ -10,12 +10,13 @@ class CadastroUsuarioModule extends ChildModule {
 
   @override
   List<Bind> get binds => [
-    Bind((i) => CadastroUsuarioController(i.get<CadastroUsuarioRepository>())),
-    Bind((i) => CadastroUsuarioRepository(i.get<Dio>()))
-  ];
+        Bind((i) =>
+            CadastroUsuarioController(i.get<CadastroUsuarioRepository>())),
+        Bind((i) => CadastroUsuarioRepository(CustomDio(false).dio))
+      ];
 
   @override
   List<ModularRouter> get routers => [
-    ModularRouter("/", child: (context, args) => CadastroUsuarioPage()),
-  ];
+        ModularRouter("/", child: (context, args) => CadastroUsuarioPage()),
+      ];
 }
