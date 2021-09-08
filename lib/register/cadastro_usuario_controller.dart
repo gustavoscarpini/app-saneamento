@@ -47,11 +47,6 @@ abstract class _CadastroUsuarioControllerBase with Store {
         print("Nome da mãe não bate");
         return false;
       }
-      if (register.email == null || register.email.trim().toLowerCase() !=
-          emailController.text.trim().toLowerCase()) {
-        print("email não bate");
-        return false;
-      }
       if(register.nascimento == null){
         print("Nascimento não bate");
         return false;
@@ -69,8 +64,8 @@ abstract class _CadastroUsuarioControllerBase with Store {
           Util.clientSideformart.parse(nascimentoController.text);
       register.nome = nomeController.text;
       register.nomeMae = nomeMaeController.text;
-      register.email = emailController.text;
     }
+    register.email = emailController.text;
     register.cpf = cpfController.text;
     return true;
   }
