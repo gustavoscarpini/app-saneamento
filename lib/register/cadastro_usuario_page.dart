@@ -64,6 +64,7 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('Solicitação de Acesso',
               style: GoogleFonts.raleway(
@@ -131,7 +132,7 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
                             InputText(
                               controller: _controllerUsuario.nomeMaeController,
                               label: "Nome da Mãe Completo",
-                              type: TextInputType.datetime,
+                              type: TextInputType.text,
                             ),
                           ],
                         ));

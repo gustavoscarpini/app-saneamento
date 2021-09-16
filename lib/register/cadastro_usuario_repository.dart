@@ -23,6 +23,7 @@ class CadastroUsuarioRepository {
       var response = await _client
           .get("/api/cpf-disponivel?cpf=${CPFValidator.strip(cpf)}");
       if (response.statusCode == 200) {
+        print(response.data);
         return Register.fromJson(response.data);
       } else {
         return Register(mensagem: "CPF Disponível para cadastro");

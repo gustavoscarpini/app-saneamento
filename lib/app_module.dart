@@ -1,8 +1,8 @@
 import 'package:appcontribuinte/config/config_module.dart';
 import 'package:appcontribuinte/dio/custom_dio.dart';
 import 'package:appcontribuinte/home/home_module.dart';
+import 'package:appcontribuinte/imoveis/imovel_module.dart';
 import 'package:appcontribuinte/login/login_module.dart';
-import 'package:appcontribuinte/login/login_repository.dart';
 import 'package:appcontribuinte/register/cadastro_usuario_module.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +26,7 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
         ModularRouter('/login', module: LoginModule()),
         ModularRouter('/home', module: HomeModule()),
+        ModularRouter('/imovel', module: ImovelModule()),
         ModularRouter('/configuracao', module: ConfigModule()),
         ModularRouter('/register', module: CadastroUsuarioModule()),
       ];

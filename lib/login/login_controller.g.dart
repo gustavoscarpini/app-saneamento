@@ -62,14 +62,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$loginSenhaSalvaAsyncAction =
-      AsyncAction('_LoginControllerBase.loginSenhaSalva');
-
-  @override
-  Future<bool> loginSenhaSalva() {
-    return _$loginSenhaSalvaAsyncAction.run(() => super.loginSenhaSalva());
-  }
-
   final _$requestResetAsyncAction =
       AsyncAction('_LoginControllerBase.requestReset');
 
@@ -84,6 +76,14 @@ mixin _$LoginController on _LoginControllerBase, Store {
   @override
   Future<dynamic> resetPassordInit(String cpf) {
     return _$resetPassordInitAsyncAction.run(() => super.resetPassordInit(cpf));
+  }
+
+  final _$redefinirSenhaAsyncAction =
+      AsyncAction('_LoginControllerBase.redefinirSenha');
+
+  @override
+  Future<dynamic> redefinirSenha() {
+    return _$redefinirSenhaAsyncAction.run(() => super.redefinirSenha());
   }
 
   final _$_LoginControllerBaseActionController =

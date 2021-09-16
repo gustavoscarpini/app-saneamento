@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:appcontribuinte/domains/token.dart';
+import 'package:appcontribuinte/domains/usuario.dart';
 import 'package:appcontribuinte/login/login_repository.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
@@ -18,27 +20,15 @@ class CustomDio {
         _dio.interceptors.clear();
         _dio.interceptors
             .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-          print(
-              "REQUEST[${options.method}] => PATH: ${options.baseUrl}${options.path}");
-
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          if (prefs.getString("token") != null) {
-            print("=== TEM TOKEN");
+          print("REQUEST[${options.method}] => PATH:${options.path}");
+          Usuario user = GetIt.instance<Usuario>();
+          if (user != null && user.token != null && user.token.isNotEmpty) {
             try {
-              var token = Token.fromJson(json.decode(prefs.getString("token")));
-              print("=== TOKEN ${token.accessToken}");
-              // Do something before request is sent
-              if (token != null &&
-                  token.accessToken != null &&
-                  token.accessToken.isNotEmpty)
-                options.headers["Authorization"] =
-                    "Bearer " + token.accessToken;
+              options.headers["Authorization"] = "Bearer " + user.token;
             } on DioError catch (e) {
               print("ERRO AO PEGAR O TOKEN ${e.error}");
             }
           }
-
           return options;
         }, onResponse: (Response response) {
           print(
@@ -55,14 +45,11 @@ class CustomDio {
             Options options = error.response.request;
             String login = prefs.getString(KEY_USERLOGIN);
             String senha = prefs.getString(KEY_PASSWORD);
-            print("vai tentar novo login ${login}  ${senha}");
-
             if (login != null &&
                 login.isNotEmpty &&
                 senha != null &&
                 senha.isNotEmpty) {
               LoginRepository _loginRepository = LoginRepository(_dio);
-
               _loginRepository.login(login, senha).then((e) {
                 //repeat
                 return _dio.request(error.response.request.path,

@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                                  BorderRadius.all(Radius.circular(10))),
                           child: ListView(
                             children: <Widget>[
                               controller.hasUsername
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: BoxDecoration(
                                   color: Color(0xFF1C84C6),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(5))),
+                                      BorderRadius.all(Radius.circular(20))),
                               child: controller.carregando
                                   ? Carregando()
                                   : SizedBox.expand(
@@ -358,40 +358,46 @@ _openEsqueciSenhaModal(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Column(
               children: <Widget>[
+                Center(
+                  child: Text(
+                    "Esqueceu a senha?",
+                    style: GoogleFonts.raleway(fontSize: 24),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                SizedBox(height: 10,),
                 TextFormField(
                   controller: controller.loginController,
                   validator: (value) =>
                       value.isEmpty ? "O login não pode ser nulo" : null,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      labelText: "CPF ou CNPJ",
+                      labelText: "Digite o CPF ou CNPJ",
                       labelStyle: GoogleFonts.raleway(
                           color: Colors.black87,
                           fontWeight: FontWeight.w400,
                           fontSize: 16)),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20.0),
-                  height: 60,
+                  margin: EdgeInsets.only(top: 30.0),
+                  height: 50,
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
-                      color: Color(0xFF1C84C6),
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                      color: primaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: controller.carregando
                       ? Carregando()
                       : SizedBox.expand(
                           child: TextButton(
                               onPressed: () async {
                                 controller.redefinirSenha().then((value) {
-                                  CustomAlert.show(context,
-                                      onConfirm: () {
-                                        Navigator.of(context)
-                                            .pushNamed("login", arguments: true)
-                                            .then((value) {});
-                                      },
+                                  CustomAlert.show(context, onConfirm: () {
+                                    Navigator.of(context)
+                                        .pushNamed("login", arguments: true)
+                                        .then((value) {});
+                                  },
                                       title: "Operação realizada",
-                                      subTitle:
-                                      "${value}",
+                                      subTitle: "${value}",
                                       style: AlertStyle.success);
                                 });
                               },
@@ -399,16 +405,16 @@ _openEsqueciSenhaModal(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: Text(
                                       "Continuar",
                                       style: GoogleFonts.raleway(
-                                          color: Colors.white, fontSize: 20),
+                                          color: Colors.white, fontSize: 22),
                                       textAlign: TextAlign.left,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: Icon(
                                       Icons.arrow_forward,
                                       color: Colors.white,
