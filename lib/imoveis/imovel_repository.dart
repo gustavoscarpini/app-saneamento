@@ -25,16 +25,14 @@ class ImovelRepository {
     }
   }
 
-  Future imprimir(String cpf, String inscricao) async {
+  Future imprimir(int id) async {
     try {
       var response = await _client.get(
-          "/api/tributario/imprimir-imovel/${CPFValidator.strip(cpf)}/${inscricao}",
+          "/api/tributario/imprimir-imovel/${id}",
         options: Options(responseType: ResponseType.bytes));
       Directory appDocDirectory = await getApplicationDocumentsDirectory();
       String path = appDocDirectory.path +
-          "/BCI" +
-          inscricao +
-          ".pdf";
+          "/BCI-$id.pdf";
       File file = File(path);
       var raf = file.openSync(mode: FileMode.write);
       raf.writeFromSync(response.data);

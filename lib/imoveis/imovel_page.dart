@@ -428,63 +428,30 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 20.0, left: 30, right: 30),
-                                          height: 50,
-                                          alignment: Alignment.centerLeft,
-                                          decoration: BoxDecoration(
-                                              color: lightBlue,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: SizedBox.expand(
-                                            child: TextButton(
-                                                onPressed: () {
-                                                  imovelController.imprimir(
-                                                      imovelController
-                                                          .imoveis[index]
-                                                          .inscricao);
-                                                },
-                                                child: imovelController
-                                                        .isLoading
-                                                    ? Carregando()
-                                                    : Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: <Widget>[
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(5.0),
-                                                            child: Text(
-                                                              "Imprimir",
-                                                              style: GoogleFonts
-                                                                  .raleway(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          16),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(5.0),
-                                                            child: Icon(
-                                                              Icons.print,
-                                                              size: 20,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )),
-                                          ),
-                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              imovelController.imprimir(
+                                                  imovelController
+                                                      .imoveis[index].id);
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "Imprimir",
+                                                  style: GoogleFonts.raleway(
+                                                      fontSize: 16, color: Colors.black54),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  color: Colors.black54,
+                                                  size: 20,
+                                                ),
+                                              ],
+                                            )),
                                       ],
                                     ),
                                   ),

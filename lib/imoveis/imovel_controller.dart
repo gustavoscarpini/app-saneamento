@@ -39,10 +39,10 @@ abstract class _ImovelControllerBase with Store {
   }
 
   @action
-  Future imprimir(String inscricao) async {
+  Future imprimir(int id) async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
-    repo.imprimir(user.pessoa.cpfCnpj, inscricao).then((value) {
+    repo.imprimir(id).then((value) {
 
       print("CHEGOUUUUU ${value}");
 

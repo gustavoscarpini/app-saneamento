@@ -61,6 +61,13 @@ mixin _$ImovelController on _ImovelControllerBase, Store {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
+  final _$imprimirAsyncAction = AsyncAction('_ImovelControllerBase.imprimir');
+
+  @override
+  Future<dynamic> imprimir(int id) {
+    return _$imprimirAsyncAction.run(() => super.imprimir(id));
+  }
+
   @override
   String toString() {
     return '''

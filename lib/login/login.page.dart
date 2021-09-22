@@ -194,6 +194,11 @@ class _LoginPageState extends State<LoginPage> {
                                               if (value) {
                                                 Navigator.pushReplacementNamed(
                                                     context, "home");
+                                              }else{
+                                                CustomAlert.show(context,
+                                                    title: "Operação não realizada",
+                                                    subTitle: "Verifique o seu usuário e senha, não foi possível realizar o login com essas informações",
+                                                    style: AlertStyle.error);
                                               }
                                             });
                                           },

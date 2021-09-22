@@ -62,6 +62,14 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$loginSenhaSalvaAsyncAction =
+      AsyncAction('_LoginControllerBase.loginSenhaSalva');
+
+  @override
+  Future<bool> loginSenhaSalva() {
+    return _$loginSenhaSalvaAsyncAction.run(() => super.loginSenhaSalva());
+  }
+
   final _$requestResetAsyncAction =
       AsyncAction('_LoginControllerBase.requestReset');
 

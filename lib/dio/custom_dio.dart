@@ -61,7 +61,7 @@ class CustomDio {
         }));
       }
       _dio.options.baseUrl = BASE_URL;
-      _dio.options.connectTimeout = 50000;
+      _dio.options.connectTimeout = 150000;
     }
   }
 
