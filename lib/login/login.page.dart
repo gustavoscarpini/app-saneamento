@@ -1,6 +1,8 @@
 import 'dart:core';
 
 import 'package:appcontribuinte/components/carregando.dart';
+import 'package:appcontribuinte/components/custom_alert.dart';
+import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -95,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                                  BorderRadius.all(Radius.circular(10))),
                           child: ListView(
                             children: <Widget>[
                               controller.hasUsername
@@ -117,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                                           : null,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
-                                          labelText: "Cpf ou Cpnj",
+                                          labelText: "CPF ou CNPJ",
                                           labelStyle: GoogleFonts.raleway(
                                               color: Colors.black87,
                                               fontWeight: FontWeight.w400,
@@ -182,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: BoxDecoration(
                                   color: Color(0xFF1C84C6),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(5))),
+                                      BorderRadius.all(Radius.circular(20))),
                               child: controller.carregando
                                   ? Carregando()
                                   : SizedBox.expand(
@@ -192,6 +194,11 @@ class _LoginPageState extends State<LoginPage> {
                                               if (value) {
                                                 Navigator.pushReplacementNamed(
                                                     context, "home");
+                                              }else{
+                                                CustomAlert.show(context,
+                                                    title: "Operação não realizada",
+                                                    subTitle: "Verifique o seu usuário e senha, não foi possível realizar o login com essas informações",
+                                                    style: AlertStyle.error);
                                               }
                                             });
                                           },
@@ -272,7 +279,8 @@ class _LoginPageState extends State<LoginPage> {
                               MaterialButton(
                                 minWidth: 40,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, "/login/reset");
+                                  _openEsqueciSenhaModal(
+                                      context, controller, _controller);
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -297,7 +305,8 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Icon(Icons.person_add_alt, color: Colors.black54),
+                                    Icon(Icons.person_add_alt,
+                                        color: Colors.black54),
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: Text(
@@ -335,4 +344,96 @@ class Controller {
     } else
       return false;
   }
+}
+
+_openEsqueciSenhaModal(
+    context, LoginController controller, Controller _controller) {
+  showModalBottomSheet(
+    isScrollControlled: true,
+    context: context,
+    builder: (context) {
+      return Observer(builder: (_) {
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: Container(
+            height: MediaQuery.of(context).size.height / 3,
+            padding: EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            child: Column(
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    "Esqueceu a senha?",
+                    style: GoogleFonts.raleway(fontSize: 24),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                TextFormField(
+                  controller: controller.loginController,
+                  validator: (value) =>
+                      value.isEmpty ? "O login não pode ser nulo" : null,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: "Digite o CPF ou CNPJ",
+                      labelStyle: GoogleFonts.raleway(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16)),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 30.0),
+                  height: 50,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: controller.carregando
+                      ? Carregando()
+                      : SizedBox.expand(
+                          child: TextButton(
+                              onPressed: () async {
+                                controller.redefinirSenha().then((value) {
+                                  CustomAlert.show(context, onConfirm: () {
+                                    Navigator.of(context)
+                                        .pushNamed("login", arguments: true)
+                                        .then((value) {});
+                                  },
+                                      title: "Operação realizada",
+                                      subTitle: "${value}",
+                                      style: AlertStyle.success);
+                                });
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      "Continuar",
+                                      style: GoogleFonts.raleway(
+                                          color: Colors.white, fontSize: 22),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ),
+                )
+              ],
+            ),
+          ),
+        );
+      });
+    },
+  );
 }

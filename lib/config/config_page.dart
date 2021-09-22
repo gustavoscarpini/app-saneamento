@@ -1,6 +1,7 @@
 import 'package:appcontribuinte/components/button_widget.dart';
 import 'package:appcontribuinte/config/config_controller.dart';
 import 'package:appcontribuinte/config/config_module.dart';
+import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +21,7 @@ class _ConfigPageState extends State<ConfigPage> {
       appBar: AppBar(
         elevation: 0,
         bottomOpacity: 0.0,
-        backgroundColor: Color(0xFF25476A),
+        backgroundColor: primaryColor,
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -30,10 +31,11 @@ class _ConfigPageState extends State<ConfigPage> {
             height: constraints.maxHeight,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF25476A), Color(0xFF4381c1)],
-                  stops: [0.3, 1]),
+                colors: gradientColorContainer,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.2, 0.8],
+              ),
             ),
             child: SafeArea(
               child: ListTileTheme(

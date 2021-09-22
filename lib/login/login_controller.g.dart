@@ -86,6 +86,14 @@ mixin _$LoginController on _LoginControllerBase, Store {
     return _$resetPassordInitAsyncAction.run(() => super.resetPassordInit(cpf));
   }
 
+  final _$redefinirSenhaAsyncAction =
+      AsyncAction('_LoginControllerBase.redefinirSenha');
+
+  @override
+  Future<dynamic> redefinirSenha() {
+    return _$redefinirSenhaAsyncAction.run(() => super.redefinirSenha());
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 

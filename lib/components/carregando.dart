@@ -1,3 +1,4 @@
+import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,7 +17,7 @@ class Carregando extends StatelessWidget {
         width: 25,
         child: CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(
-              this.inverter ? Color(0xFF25476A) : Colors.white),
+              this.inverter ? secundaryColor : Colors.white),
         ),
       )),
     );

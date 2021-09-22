@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:appcontribuinte/constants.dart';
 import 'package:appcontribuinte/domains/usuario.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
@@ -45,6 +46,17 @@ class LoginRepository extends Disposable {
     }
     GetIt.instance.registerSingleton<Usuario>(user);
     prefs.setString("token", user.token);
+  }
+
+  Future<String> redefinirSenha(String cpf) async {
+    try {
+      var response = await _client
+          .get("/api/redefinir-senha?cpf=${CPFValidator.strip(cpf)}");
+      return response.data;
+    } on DioError catch (e) {
+      print("DEU RUUUUIM ${e.error}");
+      throw e;
+    }
   }
 
   @override

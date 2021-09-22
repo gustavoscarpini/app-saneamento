@@ -75,12 +75,8 @@ abstract class _LoginControllerBase extends Disposable with Store {
 
   Future<bool> login() async {
     try {
-      print("Login ${loginController.text}");
-      print("Login ${passwordController.text}");
       carregando = true;
       usuario = await repo.login(loginController.text, passwordController.text);
-      print("Login ${usuario.pessoa.nome}");
-
       prefs.setString(KEY_USERLOGIN, loginController.text);
       prefs.setString(KEY_USERNAME, usuario.pessoa.nome.split(" ")[0]);
       prefs.setString(KEY_PASSWORD, passwordController.text);
@@ -106,6 +102,14 @@ abstract class _LoginControllerBase extends Disposable with Store {
   Future resetPassordInit(String cpf) async {
     carregando = true;
     var future = await repo.resetPassordInit(cpf);
+    carregando = false;
+    return future;
+  }
+
+  @action
+  Future redefinirSenha() async {
+    carregando = true;
+    var future = await repo.redefinirSenha(loginController.text);
     carregando = false;
     return future;
   }
