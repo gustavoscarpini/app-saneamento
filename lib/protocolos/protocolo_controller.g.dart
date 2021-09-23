@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'empresa_controller.dart';
+part of 'protocolo_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,23 +8,23 @@ part of 'empresa_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$EmpresaController on _EmpresaControllerBase, Store {
-  final _$empresasAtom = Atom(name: '_EmpresaControllerBase.empresas');
+mixin _$ProtocoloController on _ProtocoloControllerBase, Store {
+  final _$protocolosAtom = Atom(name: '_ProtocoloControllerBase.protocolos');
 
   @override
-  ObservableList<Empresa> get empresas {
-    _$empresasAtom.reportRead();
-    return super.empresas;
+  ObservableList<Protocolo> get protocolos {
+    _$protocolosAtom.reportRead();
+    return super.protocolos;
   }
 
   @override
-  set empresas(ObservableList<Empresa> value) {
-    _$empresasAtom.reportWrite(value, super.empresas, () {
-      super.empresas = value;
+  set protocolos(ObservableList<Protocolo> value) {
+    _$protocolosAtom.reportWrite(value, super.protocolos, () {
+      super.protocolos = value;
     });
   }
 
-  final _$alvarasAtom = Atom(name: '_EmpresaControllerBase.alvaras');
+  final _$alvarasAtom = Atom(name: '_ProtocoloControllerBase.alvaras');
 
   @override
   ObservableList<Alvara> get alvaras {
@@ -39,7 +39,7 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_EmpresaControllerBase.isLoading');
+  final _$isLoadingAtom = Atom(name: '_ProtocoloControllerBase.isLoading');
 
   @override
   bool get isLoading {
@@ -54,7 +54,7 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_EmpresaControllerBase.user');
+  final _$userAtom = Atom(name: '_ProtocoloControllerBase.user');
 
   @override
   Usuario get user {
@@ -69,24 +69,16 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_EmpresaControllerBase.carregar');
+  final _$carregarAsyncAction =
+      AsyncAction('_ProtocoloControllerBase.carregar');
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$carregarAlvarasAsyncAction =
-      AsyncAction('_EmpresaControllerBase.carregarAlvaras');
-
-  @override
-  Future<dynamic> carregarAlvaras(Empresa empresa) {
-    return _$carregarAlvarasAsyncAction
-        .run(() => super.carregarAlvaras(empresa));
-  }
-
   final _$imprimirCadastroAsyncAction =
-      AsyncAction('_EmpresaControllerBase.imprimirCadastro');
+      AsyncAction('_ProtocoloControllerBase.imprimirCadastro');
 
   @override
   Future<dynamic> imprimirCadastro(String inscricao) {
@@ -95,7 +87,7 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
   }
 
   final _$imprimirAlvaraAsyncAction =
-      AsyncAction('_EmpresaControllerBase.imprimirAlvara');
+      AsyncAction('_ProtocoloControllerBase.imprimirAlvara');
 
   @override
   Future<dynamic> imprimirAlvara(int alvara) {
@@ -105,7 +97,7 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
   @override
   String toString() {
     return '''
-empresas: ${empresas},
+protocolos: ${protocolos},
 alvaras: ${alvaras},
 isLoading: ${isLoading},
 user: ${user}
