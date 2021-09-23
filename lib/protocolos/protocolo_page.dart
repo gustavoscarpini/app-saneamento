@@ -172,8 +172,9 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        Divider(height: 5,),
-
+                                        Divider(
+                                          height: 5,
+                                        ),
                                         Visibility(
                                           visible: protocoloController
                                                       .protocolos[index]
@@ -200,13 +201,18 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: <Widget>[
                                                         Padding(
                                                           padding:
-                                                          const EdgeInsets.only(top: 5),
-                                                          child: Text('${protocoloController.protocolos[index].tramites[index2].indice +1}º Trâmite',
-                                                              style: GoogleFonts.raleway()),
+                                                              const EdgeInsets
+                                                                  .only(top: 5),
+                                                          child: Text(
+                                                              '${protocoloController.protocolos[index].tramites[index2].indice + 1}º Trâmite',
+                                                              style: GoogleFonts
+                                                                  .raleway()),
                                                         ),
                                                         Padding(
                                                           padding:
@@ -239,9 +245,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].conclusao == null?
-                                                              '':
-                                                              protocoloController.protocolos[index].tramites[index2].conclusao}",
+                                                          "${protocoloController.protocolos[index].tramites[index2].conclusao == null ? '' : protocoloController.protocolos[index].tramites[index2].conclusao}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -262,9 +266,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].destino == null?
-                                                              '':
-                                                              protocoloController.protocolos[index].tramites[index2].destino}",
+                                                          "${protocoloController.protocolos[index].tramites[index2].destino == null ? '' : protocoloController.protocolos[index].tramites[index2].destino}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -285,8 +287,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].aceite ==null ?
-                                                          '':protocoloController.protocolos[index].tramites[index2].aceite}",
+                                                          "${protocoloController.protocolos[index].tramites[index2].aceite == null ? '' : protocoloController.protocolos[index].tramites[index2].aceite}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -311,7 +312,9 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                 )),
                                           ),
                                         ),
-                                        Divider(height: 5,),
+                                        Divider(
+                                          height: 5,
+                                        ),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5),
@@ -344,7 +347,9 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: <Widget>[
                                                         Padding(
                                                           padding:
@@ -371,8 +376,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                           padding:
                                                               const EdgeInsets
                                                                   .only(top: 5),
-                                                          child: Text(
-                                                              'Número',
+                                                          child: Text('Número',
                                                               style: GoogleFonts
                                                                   .raleway()),
                                                         ),
@@ -402,6 +406,37 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                 )),
                                           ),
                                         ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              protocoloController.imprimir(
+                                                  protocoloController
+                                                      .protocolos[index].numero,
+                                                  protocoloController
+                                                      .protocolos[index].ano);
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "Imprimir",
+                                                  style: GoogleFonts.raleway(
+                                                      fontSize: 16,
+                                                      color: Colors.black54),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  color: Colors.black54,
+                                                  size: 20,
+                                                ),
+                                              ],
+                                            ))
                                       ],
                                     ),
                                   ),

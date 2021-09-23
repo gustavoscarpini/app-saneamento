@@ -40,37 +40,17 @@ class ProtocoloRepository {
     }
   }
 
-  Future imprimirCadastro(String cpf, String inscricao) async {
+  Future imprimir(int numero, int ano) async {
     try {
       var response = await _client.get(
-          "/api/tributario/imprimir-protocolo/${CPFValidator.strip(cpf)}/${inscricao}");
+          "/api/tributario/imprimir-protocolo/$numero/$ano");
       if (response.data == null) {
         return;
       }
       var bytes =
           base64Decode(response.data.replaceAll('\n', '').replaceAll('\"', ''));
       Directory appDocDirectory = await getApplicationDocumentsDirectory();
-      String path = appDocDirectory.path + "/BCE-$inscricao.pdf";
-      File file = File(path);
-      var raf = file.openSync(mode: FileMode.write);
-      raf.writeFromSync(bytes);
-      return OpenFile.open(path);
-    } on DioError catch (e) {
-      throw e;
-    }
-  }
-
-  Future imprimirAlvara(String cpf, int alvara) async {
-    try {
-      var response = await _client.get(
-          "/api/tributario/imprimir-alvara/${CPFValidator.strip(cpf)}/${alvara}");
-      if (response.data == null) {
-        return;
-      }
-      var bytes =
-          base64Decode(response.data.replaceAll('\n', '').replaceAll('\"', ''));
-      Directory appDocDirectory = await getApplicationDocumentsDirectory();
-      String path = appDocDirectory.path + "/Alvara-$alvara.pdf";
+      String path = appDocDirectory.path + "/Protocolo-$numero-$ano.pdf";
       File file = File(path);
       var raf = file.openSync(mode: FileMode.write);
       raf.writeFromSync(bytes);

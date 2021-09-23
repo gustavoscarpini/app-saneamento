@@ -41,17 +41,9 @@ abstract class _ProtocoloControllerBase with Store {
   }
 
   @action
-  Future imprimirCadastro(String inscricao) async {
+  Future imprimir(int numero, int ano) async {
     isLoading = true;
-    repo.imprimirCadastro(user.pessoa.cpfCnpj, inscricao).then((value) {
-      isLoading = false;
-    });
-  }
-
-  @action
-  Future imprimirAlvara(int alvara) async {
-    isLoading = true;
-    repo.imprimirAlvara(user.pessoa.cpfCnpj, alvara).then((value) {
+    repo.imprimir(numero, ano).then((value) {
       isLoading = false;
     });
   }

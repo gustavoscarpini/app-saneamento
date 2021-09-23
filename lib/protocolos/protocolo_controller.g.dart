@@ -77,21 +77,12 @@ mixin _$ProtocoloController on _ProtocoloControllerBase, Store {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirCadastroAsyncAction =
-      AsyncAction('_ProtocoloControllerBase.imprimirCadastro');
+  final _$imprimirAsyncAction =
+      AsyncAction('_ProtocoloControllerBase.imprimir');
 
   @override
-  Future<dynamic> imprimirCadastro(String inscricao) {
-    return _$imprimirCadastroAsyncAction
-        .run(() => super.imprimirCadastro(inscricao));
-  }
-
-  final _$imprimirAlvaraAsyncAction =
-      AsyncAction('_ProtocoloControllerBase.imprimirAlvara');
-
-  @override
-  Future<dynamic> imprimirAlvara(int alvara) {
-    return _$imprimirAlvaraAsyncAction.run(() => super.imprimirAlvara(alvara));
+  Future<dynamic> imprimir(int numero, int ano) {
+    return _$imprimirAsyncAction.run(() => super.imprimir(numero, ano));
   }
 
   @override
