@@ -1,4 +1,5 @@
 import 'package:appcontribuinte/config/config_module.dart';
+import 'package:appcontribuinte/debitos/debito_module.dart';
 import 'package:appcontribuinte/dio/custom_dio.dart';
 import 'package:appcontribuinte/empresas/empresa_module.dart';
 import 'package:appcontribuinte/home/home_module.dart';
@@ -31,6 +32,7 @@ class AppModule extends MainModule {
         ModularRouter('/imovel', module: ImovelModule()),
         ModularRouter('/empresa', module: EmpresaModule()),
         ModularRouter('/protocolo', module: ProtocoloModule()),
+        ModularRouter('/debito', module: DebitoModule()),
         ModularRouter('/configuracao', module: ConfigModule()),
         ModularRouter('/register', module: CadastroUsuarioModule()),
       ];

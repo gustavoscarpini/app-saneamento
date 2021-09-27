@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> with Disposable {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * .3,
+                        height: MediaQuery.of(context).size.height * .55,
                       )
                     ],
                   ),
