@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   var controller = LoginModule.to.get<LoginController>();
 
   Controller _controller;
+  bool showPassword = false;
 
   @override
   void didChangeDependencies() {
@@ -132,9 +133,17 @@ class _LoginPageState extends State<LoginPage> {
                                     ? "A senha não pode ser nulo"
                                     : null,
                                 keyboardType: TextInputType.text,
-                                obscureText: true,
+                                obscureText: !showPassword,
                                 decoration: InputDecoration(
                                     labelText: "Senha",
+                                    suffixIcon: IconButton(
+                                      icon: Icon(showPassword ? Icons.remove_red_eye_outlined :Icons.remove_red_eye),
+                                      onPressed: () {
+                                        setState(() {
+                                          showPassword = !showPassword;
+                                        });
+                                      },
+                                    ),
                                     labelStyle: GoogleFonts.raleway(
                                         color: Colors.black87,
                                         fontWeight: FontWeight.w400,
@@ -194,10 +203,12 @@ class _LoginPageState extends State<LoginPage> {
                                               if (value) {
                                                 Navigator.pushReplacementNamed(
                                                     context, "home");
-                                              }else{
+                                              } else {
                                                 CustomAlert.show(context,
-                                                    title: "Operação não realizada",
-                                                    subTitle: "Verifique o seu usuário e senha, não foi possível realizar o login com essas informações",
+                                                    title:
+                                                        "Operação não realizada",
+                                                    subTitle:
+                                                        "Verifique o seu usuário e senha, não foi possível realizar o login com essas informações",
                                                     style: AlertStyle.error);
                                               }
                                             });
@@ -370,7 +381,9 @@ _openEsqueciSenhaModal(
                     textAlign: TextAlign.left,
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   controller: controller.loginController,
                   validator: (value) =>

@@ -44,7 +44,6 @@ abstract class _LoginControllerBase extends Disposable with Store {
       loginController.text = cpf;
     }
     String bio = prefs.getString(KEY_BIOMETRIA);
-    print("BIOMETRIA ${bio}");
     if (bio != null && bio.isNotEmpty) {
       biometria = bio.toLowerCase() == 'true';
     }
