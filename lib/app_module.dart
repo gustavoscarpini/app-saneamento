@@ -1,9 +1,12 @@
 import 'package:appcontribuinte/config/config_module.dart';
+import 'package:appcontribuinte/debitos/debito_module.dart';
 import 'package:appcontribuinte/dio/custom_dio.dart';
 import 'package:appcontribuinte/empresas/empresa_module.dart';
 import 'package:appcontribuinte/home/home_module.dart';
 import 'package:appcontribuinte/imoveis/imovel_module.dart';
 import 'package:appcontribuinte/login/login_module.dart';
+import 'package:appcontribuinte/perfil/perfil_module.dart';
+import 'package:appcontribuinte/protocolos/protocolo_module.dart';
 import 'package:appcontribuinte/register/cadastro_usuario_module.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +32,10 @@ class AppModule extends MainModule {
         ModularRouter('/home', module: HomeModule()),
         ModularRouter('/imovel', module: ImovelModule()),
         ModularRouter('/empresa', module: EmpresaModule()),
+        ModularRouter('/protocolo', module: ProtocoloModule()),
+        ModularRouter('/debito', module: DebitoModule()),
         ModularRouter('/configuracao', module: ConfigModule()),
         ModularRouter('/register', module: CadastroUsuarioModule()),
+        ModularRouter('/perfil', module: PerfilModule()),
       ];
 }

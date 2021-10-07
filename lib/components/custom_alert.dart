@@ -8,8 +8,9 @@ abstract class CustomAlert {
       String subTitle,
       AlertStyle style,
       Function onConfirm,
-      String textConfirm: "Continuar"}) {
+      String textConfirm: "Continuar", bool isDismissible:true}) {
     showModalBottomSheet(
+        isDismissible: isDismissible,
         context: context,
         builder: (context) {
           return Container(

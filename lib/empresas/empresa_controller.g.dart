@@ -85,11 +85,21 @@ mixin _$EmpresaController on _EmpresaControllerBase, Store {
         .run(() => super.carregarAlvaras(empresa));
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_EmpresaControllerBase.imprimir');
+  final _$imprimirCadastroAsyncAction =
+      AsyncAction('_EmpresaControllerBase.imprimirCadastro');
 
   @override
   Future<dynamic> imprimirCadastro(String inscricao) {
-    return _$imprimirAsyncAction.run(() => super.imprimirCadastro(inscricao));
+    return _$imprimirCadastroAsyncAction
+        .run(() => super.imprimirCadastro(inscricao));
+  }
+
+  final _$imprimirAlvaraAsyncAction =
+      AsyncAction('_EmpresaControllerBase.imprimirAlvara');
+
+  @override
+  Future<dynamic> imprimirAlvara(int alvara) {
+    return _$imprimirAlvaraAsyncAction.run(() => super.imprimirAlvara(alvara));
   }
 
   @override
