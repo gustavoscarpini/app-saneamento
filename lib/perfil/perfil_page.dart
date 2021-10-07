@@ -209,7 +209,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
           return Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
-              height: MediaQuery.of(context).size.height / 1.5,
+              height: MediaQuery.of(context).size.height / 2,
               padding:
                   EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
               decoration: BoxDecoration(
@@ -228,12 +228,13 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                     height: 10,
                   ),
                   TextFormField(
-                    validator: (value) =>
-                        value.isEmpty ? "Senha atual não pode ser nulo" : null,
-                    keyboardType: TextInputType.text,
                     controller: perfilController.passwordController,
+                    validator: (value) =>
+                        value.isEmpty ? "A senha não pode ser nulo" : null,
+                    keyboardType: TextInputType.text,
+                    obscureText: true,
                     decoration: InputDecoration(
-                        labelText: "Senha Atual",
+                        labelText: "Senha",
                         labelStyle: GoogleFonts.raleway(
                             color: Colors.black87,
                             fontWeight: FontWeight.w400,
@@ -243,13 +244,14 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                     height: 10,
                   ),
                   TextFormField(
-                    validator: (value) =>
-                        value.isEmpty ? "Nova senha não pode ser nulo" : null,
-                    keyboardType: TextInputType.text,
                     controller: perfilController.newPasswordController,
+                    validator: (value) =>
+                        value.isEmpty ? "A nova senha não pode ser nulo" : null,
+                    keyboardType: TextInputType.text,
+                    obscureText: true,
                     decoration: InputDecoration(
-                        labelText: "Nova Senha",
-                        labelStyle: GoogleFonts.raleway(
+                        labelText: "Senha",
+                       labelStyle: GoogleFonts.raleway(
                             color: Colors.black87,
                             fontWeight: FontWeight.w400,
                             fontSize: 16)),
@@ -258,12 +260,14 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                     height: 10,
                   ),
                   TextFormField(
-                    validator: (value) =>
-                        value.isEmpty ? "Nova senha não pode ser nulo" : null,
-                    controller: perfilController.repearPasswordController,
+                    controller: perfilController.passwordController,
+                    validator: (value) => value.isEmpty
+                        ? "A senha repetida não pode ser nulo"
+                        : null,
                     keyboardType: TextInputType.text,
+                    obscureText:true,
                     decoration: InputDecoration(
-                        labelText: "Repita a Nova Senha",
+                        labelText: "Senha",
                         labelStyle: GoogleFonts.raleway(
                             color: Colors.black87,
                             fontWeight: FontWeight.w400,
@@ -282,10 +286,10 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                             perfilController.trocarSenha().then((value) {
                               print(value);
                               CustomAlert.show(context, onConfirm: () {
-                                if(value != 0){
+                                if (value != 0) {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
-                                }else{
+                                } else {
                                   Navigator.of(context).pop();
                                 }
                               },
