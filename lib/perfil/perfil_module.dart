@@ -1,3 +1,5 @@
+import 'package:appcontribuinte/dio/custom_dio.dart';
+import 'package:appcontribuinte/login/login_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,8 +12,9 @@ class PerfilModule extends ChildModule {
 
   @override
   List<Bind> get binds => [
-        Bind((i) => PerfilController(i.get<PerfilRepository>())),
-        Bind((i) => PerfilRepository(i.get<Dio>()))
+        Bind((i) => PerfilController(i.get<PerfilRepository>(), i.get<LoginRepository>())),
+        Bind((i) => PerfilRepository(i.get<Dio>())),
+        Bind((i) => LoginRepository(new CustomDio(false).dio))
       ];
 
   @override

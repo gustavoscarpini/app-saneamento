@@ -1,4 +1,3 @@
-import 'package:appcontribuinte/components/button_widget.dart';
 import 'package:appcontribuinte/components/carregando.dart';
 import 'package:appcontribuinte/components/custom_alert.dart';
 import 'package:appcontribuinte/constants.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'perfil_controller.dart';
@@ -202,8 +200,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
     );
   }
 
-  _openTrocarSenha(
-      context) {
+  _openTrocarSenha(context) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -213,7 +210,8 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
               height: MediaQuery.of(context).size.height / 1.5,
-              padding: EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -231,8 +229,9 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   ),
                   TextFormField(
                     validator: (value) =>
-                    value.isEmpty ? "Senha atual não pode ser nulo" : null,
+                        value.isEmpty ? "Senha atual não pode ser nulo" : null,
                     keyboardType: TextInputType.text,
+                    controller: perfilController.passwordController,
                     decoration: InputDecoration(
                         labelText: "Senha Atual",
                         labelStyle: GoogleFonts.raleway(
@@ -245,8 +244,9 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   ),
                   TextFormField(
                     validator: (value) =>
-                    value.isEmpty ? "Nova senha não pode ser nulo" : null,
+                        value.isEmpty ? "Nova senha não pode ser nulo" : null,
                     keyboardType: TextInputType.text,
+                    controller: perfilController.newPasswordController,
                     decoration: InputDecoration(
                         labelText: "Nova Senha",
                         labelStyle: GoogleFonts.raleway(
@@ -259,7 +259,8 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   ),
                   TextFormField(
                     validator: (value) =>
-                    value.isEmpty ? "Nova senha não pode ser nulo" : null,
+                        value.isEmpty ? "Nova senha não pode ser nulo" : null,
+                    controller: perfilController.repearPasswordController,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         labelText: "Repita a Nova Senha",
@@ -275,10 +276,29 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                     decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child:SizedBox.expand(
+                    child: SizedBox.expand(
                       child: TextButton(
                           onPressed: () async {
-
+                            perfilController.trocarSenha().then((value) {
+                              print(value);
+                              CustomAlert.show(context, onConfirm: () {
+                                if(value != 0){
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                }else{
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                                  isDismissible: false,
+                                  title: value != 0
+                                      ? "Operação realizada"
+                                      : "Operação não realizada",
+                                  subTitle:
+                                      "${perfilController.mensagemTrocaSenha}",
+                                  style: value != 0
+                                      ? AlertStyle.success
+                                      : AlertStyle.warning);
+                            });
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -294,10 +314,12 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                ),
+                                child: perfilController.isLoading
+                                    ? Carregando()
+                                    : Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      ),
                               ),
                             ],
                           )),
@@ -311,5 +333,4 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
       },
     );
   }
-
 }
