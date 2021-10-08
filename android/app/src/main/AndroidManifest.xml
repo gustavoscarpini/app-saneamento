@@ -2,7 +2,7 @@
     package="com.webpublico.riobranco.appcontribuinte">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="appcontribuinte"
+        android:label="Serviços Online Rio Branco"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
