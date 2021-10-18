@@ -89,11 +89,11 @@ class _HomePageState extends State<HomePage> with Disposable {
                             children: <Widget>[
                               IconButton(
                                 icon: Icon(
-                                  Icons.menu,
+                                  Icons.person,
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed("configuracao");
+                                  Navigator.of(context).pushNamed("perfil");
                                 },
                               ),
                               Text("Portal do Contribuínte",

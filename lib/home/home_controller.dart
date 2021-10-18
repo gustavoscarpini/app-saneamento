@@ -20,9 +20,9 @@ abstract class _HomeControllerBase with Store {
     const Opcao(titulo: 'Débitos', icon: Icons.attach_money, rota:"debito"),
     const Opcao(titulo: 'Certidões', icon: Icons.file_copy_outlined, rota:"certidao"),
     const Opcao(titulo: 'ITBI', icon: Icons.account_balance_outlined, rota:"itbi"),
-    const Opcao(titulo: 'Notas Avulsas', icon: Icons.file_present, rota:"nota-avulsa"),
-    const Opcao(titulo: 'Aut. Documentos', icon: Icons.fact_check_outlined, rota:"autenticacao"),
-    const Opcao(titulo: 'Notas Recebibas', icon: Icons.upload_file, rota:"nota-recebida"),
+    // const Opcao(titulo: 'Notas Avulsas', icon: Icons.file_present, rota:"nota-avulsa"),
+    // const Opcao(titulo: 'Aut. Documentos', icon: Icons.fact_check_outlined, rota:"autenticacao"),
+    // const Opcao(titulo: 'Notas Recebibas', icon: Icons.upload_file, rota:"nota-recebida"),
   ];
 
   _HomeControllerBase(

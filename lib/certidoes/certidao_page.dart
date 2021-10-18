@@ -84,7 +84,7 @@ class _CertidaoPageState extends State<CertidaoPage> with Disposable {
                           )
                         : Center(
                             child: Text(
-                                "Nenhuma certidao vinculada ao seu CPF/CNPJ",
+                                "Nenhuma certidão vinculada ao seu CPF/CNPJ",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.raleway(
                                     color: Colors.black54,
@@ -270,85 +270,6 @@ class _CertidaoPageState extends State<CertidaoPage> with Disposable {
           );
         },
       ),
-    );
-  }
-
-  _openModalAlvara(context) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return Observer(builder: (_) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              height: MediaQuery.of(context).size.height / 1.5,
-              padding:
-                  EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: Column(
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      "Alvaras",
-                      style: GoogleFonts.raleway(fontSize: 24),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ListView.separated(
-                    itemCount: certidaoController.alvaras.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "${certidaoController.alvaras[index].ano}",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${certidaoController.alvaras[index].tipo}",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${certidaoController.alvaras[index].emissao}",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return Divider(
-                        height: 5,
-                      );
-                    },
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-      },
     );
   }
 }

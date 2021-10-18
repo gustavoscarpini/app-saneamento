@@ -1,3 +1,4 @@
+import 'package:appcontribuinte/components/button_widget.dart';
 import 'package:appcontribuinte/components/carregando.dart';
 import 'package:appcontribuinte/components/custom_alert.dart';
 import 'package:appcontribuinte/constants.dart';
@@ -55,140 +56,124 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   padding: const EdgeInsets.all(10),
                   child: Container(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white,
-                              child: perfilController.user != null &&
-                                      perfilController.user.pessoa != null &&
-                                      perfilController.user.pessoa.foto !=
-                                          null &&
-                                      perfilController.user.pessoa.foto.file !=
-                                          null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: Image.file(
-                                        perfilController.user.pessoa.foto.file,
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    )
-                                  : Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      width: 100,
-                                      height: 100,
-                                      child: Icon(
-                                        Icons.person,
-                                        color: Colors.grey[800],
-                                      ),
-                                    ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 30, bottom: 10),
-                          padding: EdgeInsets.only(left: 15, top: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: AutoSizeText(
-                                  "${perfilController.user.pessoa.nome}",
-                                  maxLines: 1,
-                                  style: GoogleFonts.raleway(
-                                      color: Colors.black87,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w300),
+                        Column(children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.white,
+                                child: perfilController.user != null &&
+                                    perfilController.user.pessoa != null &&
+                                    perfilController.user.pessoa.foto !=
+                                        null &&
+                                    perfilController.user.pessoa.foto.file !=
+                                        null
+                                    ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: Image.file(
+                                    perfilController.user.pessoa.foto.file,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.fill,
+                                  ),
+                                )
+                                    : Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius:
+                                      BorderRadius.circular(50)),
+                                  width: 100,
+                                  height: 100,
+                                  child: Icon(
+                                    Icons.person,
+                                    color: Colors.grey[800],
+                                  ),
                                 ),
                               ),
-                              Center(
-                                child: AutoSizeText(
-                                  "${perfilController.user.pessoa.email}",
-                                  maxLines: 1,
-                                  style: GoogleFonts.raleway(
-                                      color: Colors.black54, fontSize: 16.0),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 30, bottom: 10),
+                            padding: EdgeInsets.only(left: 15, top: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: AutoSizeText(
+                                    "${perfilController.user.pessoa.nome}",
+                                    maxLines: 1,
+                                    style: GoogleFonts.raleway(
+                                        color: Colors.black87,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w300),
+                                  ),
                                 ),
-                              )
+                                Center(
+                                  child: AutoSizeText(
+                                    "${perfilController.user.pessoa.email}",
+                                    maxLines: 1,
+                                    style: GoogleFonts.raleway(
+                                        color: Colors.black54, fontSize: 16.0),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('CPF', style: GoogleFonts.raleway()),
+                                    Text(
+                                      "${perfilController.user.pessoa.cpfCnpj}",
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 16, color: Colors.black54),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('RG', style: GoogleFonts.raleway()),
+                                    Text(
+                                      "${perfilController.user.pessoa.rgInscricao}",
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 16, color: Colors.black54),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
+                        ],),
+                        Column(
                           children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('CPF', style: GoogleFonts.raleway()),
-                                  Text(
-                                    "${perfilController.user.pessoa.cpfCnpj}",
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 16, color: Colors.black54),
-                                  ),
-                                ],
-                              ),
+                            ButtonWidget(
+                              onPressed: () {
+                                _openTrocarSenha(context);
+                              },
+                              text: "ALTERAR SENHA",
+                              color: primaryColor,
                             ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('RG', style: GoogleFonts.raleway()),
-                                  Text(
-                                    "${perfilController.user.pessoa.rgInscricao}",
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 16, color: Colors.black54),
-                                  ),
-                                ],
-                              ),
+                            SizedBox(height: 20),
+                            ButtonWidget(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(context, "/login");
+                              },
+                              text: "SAIR DA CONTA",
+                              color: primaryColor,
                             ),
                           ],
-                        ),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: 220.0, left: 30, right: 30),
-                          height: 60,
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                              color: lightBlue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          child: SizedBox.expand(
-                            child: FlatButton(
-                                onPressed: () {
-                                  _openTrocarSenha(context);
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      "Alterar Senha",
-                                      style: GoogleFonts.raleway(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                          fontSize: 20),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Container(
-                                      child: SizedBox(
-                                        child: Icon(
-                                          Icons.vpn_key_outlined,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ),
                         ),
                       ],
                     ),

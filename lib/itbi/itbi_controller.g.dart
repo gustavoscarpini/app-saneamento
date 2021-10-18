@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'certidao_controller.dart';
+part of 'itbi_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,23 +8,23 @@ part of 'certidao_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$CertidaoController on _CertidaoControllerBase, Store {
-  final _$certidaosAtom = Atom(name: '_CertidaoControllerBase.certidaos');
+mixin _$ItbiController on _ItbiControllerBase, Store {
+  final _$itbisAtom = Atom(name: '_ItbiControllerBase.itbis');
 
   @override
-  ObservableList<Certidao> get certidaos {
-    _$certidaosAtom.reportRead();
-    return super.certidaos;
+  ObservableList<Itbi> get itbis {
+    _$itbisAtom.reportRead();
+    return super.itbis;
   }
 
   @override
-  set certidaos(ObservableList<Certidao> value) {
-    _$certidaosAtom.reportWrite(value, super.certidaos, () {
-      super.certidaos = value;
+  set itbis(ObservableList<Itbi> value) {
+    _$itbisAtom.reportWrite(value, super.itbis, () {
+      super.itbis = value;
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_CertidaoControllerBase.isLoading');
+  final _$isLoadingAtom = Atom(name: '_ItbiControllerBase.isLoading');
 
   @override
   bool get isLoading {
@@ -39,7 +39,7 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$iniciouAtom = Atom(name: '_CertidaoControllerBase.iniciou');
+  final _$iniciouAtom = Atom(name: '_ItbiControllerBase.iniciou');
 
   @override
   bool get iniciou {
@@ -54,7 +54,7 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_CertidaoControllerBase.user');
+  final _$userAtom = Atom(name: '_ItbiControllerBase.user');
 
   @override
   Usuario get user {
@@ -69,38 +69,38 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_CertidaoControllerBase.carregar');
+  final _$carregarAsyncAction = AsyncAction('_ItbiControllerBase.carregar');
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_CertidaoControllerBase.imprimir');
+  final _$imprimirAsyncAction = AsyncAction('_ItbiControllerBase.imprimir');
 
   @override
-  Future<dynamic> imprimir(Certidao certidao) {
-    return _$imprimirAsyncAction.run(() => super.imprimir(certidao));
+  Future<dynamic> imprimir(Itbi itbi) {
+    return _$imprimirAsyncAction.run(() => super.imprimir(itbi));
   }
 
-  final _$_CertidaoControllerBaseActionController =
-      ActionController(name: '_CertidaoControllerBase');
+  final _$_ItbiControllerBaseActionController =
+      ActionController(name: '_ItbiControllerBase');
 
   @override
   void init() {
-    final _$actionInfo = _$_CertidaoControllerBaseActionController.startAction(
-        name: '_CertidaoControllerBase.init');
+    final _$actionInfo = _$_ItbiControllerBaseActionController.startAction(
+        name: '_ItbiControllerBase.init');
     try {
       return super.init();
     } finally {
-      _$_CertidaoControllerBaseActionController.endAction(_$actionInfo);
+      _$_ItbiControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-certidaos: ${certidaos},
+itbis: ${itbis},
 isLoading: ${isLoading},
 iniciou: ${iniciou},
 user: ${user}

@@ -1,26 +1,25 @@
-import 'package:appcontribuinte/domains/alvara.dart';
-import 'package:appcontribuinte/domains/certidao.dart';
+import 'package:appcontribuinte/domains/itbi.dart';
 import 'package:appcontribuinte/domains/usuario.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
-import 'certidao_repository.dart';
+import 'itbi_repository.dart';
 
-part 'certidao_controller.g.dart';
+part 'itbi_controller.g.dart';
 
-class CertidaoController = _CertidaoControllerBase with _$CertidaoController;
+class ItbiController = _ItbiControllerBase with _$ItbiController;
 
-abstract class _CertidaoControllerBase with Store {
-  final CertidaoRepository repo;
+abstract class _ItbiControllerBase with Store {
+  final ItbiRepository repo;
 
-  _CertidaoControllerBase(
+  _ItbiControllerBase(
     this.repo,
   );
 
   int page;
 
   @observable
-  ObservableList<Certidao> certidaos = ObservableList();
+  ObservableList<Itbi> itbis = ObservableList();
 
   @observable
   bool isLoading = false;
@@ -39,7 +38,7 @@ abstract class _CertidaoControllerBase with Store {
   }
 
   void zerarCertidoes() {
-    certidaos.clear();
+    itbis.clear();
     page = 0;
   }
 
@@ -48,7 +47,7 @@ abstract class _CertidaoControllerBase with Store {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     repo.consultarPorCPF(user.pessoa.cpfCnpj, page).then((value) {
-      certidaos.addAll(value);
+      itbis.addAll(value);
       isLoading = false;
       iniciou = true;
     }).onError((error, stackTrace) {
@@ -56,13 +55,14 @@ abstract class _CertidaoControllerBase with Store {
       iniciou = true;
       zerarCertidoes();
       print("Errinho $error >> $iniciou >> $isLoading");
+      throw error;
     });
   }
 
   @action
-  Future imprimir(Certidao certidao) async {
+  Future imprimir(Itbi itbi) async {
     isLoading = true;
-    repo.imprimir(certidao).then((value) {
+    repo.imprimir(itbi).then((value) {
       isLoading = false;
     });
   }
