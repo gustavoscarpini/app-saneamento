@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:appcontribuinte/domains/token.dart';
 import 'package:appcontribuinte/domains/usuario.dart';
 import 'package:appcontribuinte/login/login_repository.dart';
 import 'package:dio/dio.dart';
@@ -20,7 +18,7 @@ class CustomDio {
         _dio.interceptors.clear();
         _dio.interceptors
             .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-          print("REQUEST[${options.method}] => PATH:${options.path}");
+          print("REQUEST[${options.method}] => PATH:${options.baseUrl + options.path}");
           Usuario user = GetIt.instance<Usuario>();
           if (user != null && user.token != null && user.token.isNotEmpty) {
             try {

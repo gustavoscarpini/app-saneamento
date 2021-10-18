@@ -9,6 +9,22 @@ part of 'perfil_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PerfilController on _PerfilControllerBase, Store {
+  final _$mensagemTrocaSenhaAtom =
+      Atom(name: '_PerfilControllerBase.mensagemTrocaSenha');
+
+  @override
+  String get mensagemTrocaSenha {
+    _$mensagemTrocaSenhaAtom.reportRead();
+    return super.mensagemTrocaSenha;
+  }
+
+  @override
+  set mensagemTrocaSenha(String value) {
+    _$mensagemTrocaSenhaAtom.reportWrite(value, super.mensagemTrocaSenha, () {
+      super.mensagemTrocaSenha = value;
+    });
+  }
+
   final _$isLoadingAtom = Atom(name: '_PerfilControllerBase.isLoading');
 
   @override
@@ -46,9 +62,18 @@ mixin _$PerfilController on _PerfilControllerBase, Store {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
+  final _$trocarSenhaAsyncAction =
+      AsyncAction('_PerfilControllerBase.trocarSenha');
+
+  @override
+  Future<dynamic> trocarSenha() {
+    return _$trocarSenhaAsyncAction.run(() => super.trocarSenha());
+  }
+
   @override
   String toString() {
     return '''
+mensagemTrocaSenha: ${mensagemTrocaSenha},
 isLoading: ${isLoading},
 user: ${user}
     ''';

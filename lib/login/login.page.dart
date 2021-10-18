@@ -242,34 +242,34 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                     ),
                             ),
-                            Visibility(
-                              visible: controller
-                                      .passwordController.text.isEmpty &&
-                                  !controller.loginController.text.isEmpty &&
-                                  controller.hasUsername != null,
-                              child: Container(
-                                height: 30,
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      "Biometria",
-                                    ),
-                                    Switch(
-                                      activeTrackColor: Colors.blueGrey,
-                                      activeColor: Color(0xFF26A69A),
-                                      value: controller.biometria,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          controller.usarBiometria(value);
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Visibility(
+                            //   visible: controller
+                            //           .passwordController.text.isEmpty &&
+                            //       !controller.loginController.text.isEmpty &&
+                            //       controller.hasUsername != null,
+                            //   child: Container(
+                            //     height: 30,
+                            //     alignment: Alignment.center,
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       children: <Widget>[
+                            //         Text(
+                            //           "Biometria",
+                            //         ),
+                            //         Switch(
+                            //           activeTrackColor: Colors.blueGrey,
+                            //           activeColor: Color(0xFF26A69A),
+                            //           value: controller.biometria,
+                            //           onChanged: (bool value) {
+                            //             setState(() {
+                            //               controller.usarBiometria(value);
+                            //             });
+                            //           },
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         )
                       ],
