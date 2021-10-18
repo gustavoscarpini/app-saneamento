@@ -1,3 +1,4 @@
+import 'package:appcontribuinte/certidoes/certidao_module.dart';
 import 'package:appcontribuinte/config/config_module.dart';
 import 'package:appcontribuinte/debitos/debito_module.dart';
 import 'package:appcontribuinte/dio/custom_dio.dart';
@@ -36,6 +37,7 @@ class AppModule extends MainModule {
         ModularRouter('/debito', module: DebitoModule()),
         ModularRouter('/configuracao', module: ConfigModule()),
         ModularRouter('/register', module: CadastroUsuarioModule()),
+        ModularRouter('/certidao', module: CertidaoModule()),
         ModularRouter('/perfil', module: PerfilModule()),
       ];
 }
