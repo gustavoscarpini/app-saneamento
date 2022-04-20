@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:appcontribuinte/domains/debito.dart';
+import 'package:appcontribuinte/domains/pix.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:dio/dio.dart';
 import 'package:open_file/open_file.dart';
@@ -39,6 +40,16 @@ class DebitoRepository {
       var raf = file.openSync(mode: FileMode.write);
       raf.writeFromSync(bytes);
       return OpenFile.open(path);
+    } on DioError catch (e) {
+      throw e;
+    }
+  }
+
+  Future<Pix> gerarQrCodePix(Debito debito) async {
+    try {
+      var response =
+          await _client.post("/api/tributario/gerar-qrcode-pix/", data: debito);
+      return Pix.fromJson(response.data);
     } on DioError catch (e) {
       throw e;
     }

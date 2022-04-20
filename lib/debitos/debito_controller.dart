@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:appcontribuinte/domains/alvara.dart';
 import 'package:appcontribuinte/domains/debito.dart';
+import 'package:appcontribuinte/domains/pix.dart';
 import 'package:appcontribuinte/domains/usuario.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
@@ -24,6 +27,9 @@ abstract class _DebitoControllerBase with Store {
   ObservableList<Alvara> alvaras = ObservableList();
 
   @observable
+  ObservableList<Map<Debito, Pix>> qrCodes = ObservableList();
+
+  @observable
   bool isLoading = false;
 
   @observable
@@ -46,5 +52,20 @@ abstract class _DebitoControllerBase with Store {
     repo.imprimir(debito).then((value) {
       isLoading = false;
     });
+  }
+
+  @action
+  Future gerarQrCodePix(Debito debito) async {
+    isLoading = true;
+    qrCodes.clear();
+    repo.gerarQrCodePix(debito).then((pix) {
+      qrCodes.add({debito : pix});
+      isLoading = false;
+    });
+  }
+
+  @action
+  Uint8List imageFromBase64String(String base64String) {
+    return base64Decode(base64String);
   }
 }

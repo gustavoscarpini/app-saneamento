@@ -32,7 +32,7 @@ class ButtonWidget extends StatelessWidget {
           border: Border.all(color: color),
         ),
         child: SizedBox.expand(
-          child: FlatButton(
+          child: TextButton(
               onPressed: onPressed,
               child: Row(
                 mainAxisAlignment: icon != null? MainAxisAlignment.spaceBetween: MainAxisAlignment.center,
