@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ? Container(
                                       height: 40,
                                       alignment: Alignment.bottomRight,
-                                      child: FlatButton(
+                                      child: TextButton(
                                           onPressed: () {
                                             controller.zerarUsuario();
                                           },
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                   : Container(
                                       height: 40,
                                       alignment: Alignment.bottomRight,
-                                      child: FlatButton(
+                                      child: TextButton(
                                           onPressed: () {
                                             Navigator.pushNamed(
                                                 context, "register");
@@ -197,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: controller.carregando
                                   ? Carregando()
                                   : SizedBox.expand(
-                                      child: FlatButton(
+                                      child: TextButton(
                                           onPressed: () async {
                                             controller.login().then((value) {
                                               if (value) {

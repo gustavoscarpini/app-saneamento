@@ -84,6 +84,11 @@ mixin _$DebitoController on _DebitoControllerBase, Store {
   }
 
   @override
+  Future<dynamic> gerarQrCodePix(Debito debito) {
+    return super.gerarQrCodePix(debito);
+  }
+
+  @override
   String toString() {
     return '''
 debitos: ${debitos},

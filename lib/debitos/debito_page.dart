@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -376,6 +378,34 @@ class _DebitoPageState extends State<DebitoPage> with Disposable {
                                                 ),
                                               ],
                                             )),
+                                        TextButton(
+                                            onPressed: () async {
+                                              debitoController.gerarQrCodePix(
+                                                  debitoController
+                                                      .debitos[index]);
+
+                                              _openModalQrCodePIX(context);
+                                            },
+                                            focusNode: new FocusNode(),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "Pix",
+                                                  style: GoogleFonts.raleway(
+                                                      fontSize: 16,
+                                                      color: Colors.black54),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: Image.asset("assets/pix-img.png", color: Color(0xFF32BCAD),),
+                                                )
+                                              ],
+                                            )),
                                       ],
                                     ),
                                   ),
@@ -465,6 +495,151 @@ class _DebitoPageState extends State<DebitoPage> with Disposable {
                       );
                     },
                   )
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
+  _openModalQrCodePIX(context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return Observer(builder: (_) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: debitoController.isLoading ? null :
+            Container(
+              height: MediaQuery.of(context).size.height / 1.5,
+              padding:
+                  EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      "Pix",
+                      style: GoogleFonts.raleway(fontSize: 24),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                      child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Image(
+                          image: ResizeImage(
+                              MemoryImage(debitoController
+                                  .imageFromBase64String(debitoController
+                                      .qrCodes.first.values.first.base64Pix)),
+                              width: 150,
+                              height: 150)),
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                                'Valor: ' +
+                                    "${debitoController.qrCodes.first.keys.first.valorTotal}",
+                                style: GoogleFonts.raleway(
+                                    fontSize: 14.5,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold)),
+                            Text(
+                                'Vencimento: ' +
+                                    "${debitoController.qrCodes.first.values.first.vencimento}",
+                                style: GoogleFonts.raleway(
+                                    fontSize: 14.5,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      )),
+                    ],
+                  )),
+                  Container(
+                      child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.black87),
+                          initialValue:
+                              debitoController.qrCodes.first.values.first.qrCode,
+                          readOnly: true,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 10, 20, 20),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              labelText: "Pix copia e cola!",
+                              labelStyle: GoogleFonts.raleway(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16)),
+                        ),
+                      ),
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.only(top: 0, left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                                    onPressed: () {
+                                      Clipboard.setData(ClipboardData(
+                                          text: debitoController.qrCodes.first
+                                              .values.first.qrCode));
+                                      setState(() {});
+                                      return FlutterToast(context).showToast(
+                                          child: Container(
+                                            padding: EdgeInsets.only(top: 0, bottom: 200),
+                                            child: Text(
+                                              'Copiado!',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.raleway(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          toastDuration: Duration(seconds: 1));
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.content_copy_outlined,
+                                          color: Colors.black54,
+                                          size: 35,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                        ),
+                      )),
+                    ],
+                  )),
                 ],
               ),
             ),
