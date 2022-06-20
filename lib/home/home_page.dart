@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> with Disposable {
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed("perfil");
+                                  Modular.to.pushNamed("/perfil");
                                 },
                               ),
                               Text("Portal do Contribuínte",
