@@ -6,10 +6,10 @@ part of 'login_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginController on _LoginControllerBase, Store {
-  Computed<bool> _$hasUsernameComputed;
+  Computed<bool>? _$hasUsernameComputed;
 
   @override
   bool get hasUsername =>
@@ -17,22 +17,24 @@ mixin _$LoginController on _LoginControllerBase, Store {
               name: '_LoginControllerBase.hasUsername'))
           .value;
 
-  final _$userNameAtom = Atom(name: '_LoginControllerBase.userName');
+  late final _$userNameAtom =
+      Atom(name: '_LoginControllerBase.userName', context: context);
 
   @override
-  String get userName {
+  String? get userName {
     _$userNameAtom.reportRead();
     return super.userName;
   }
 
   @override
-  set userName(String value) {
+  set userName(String? value) {
     _$userNameAtom.reportWrite(value, super.userName, () {
       super.userName = value;
     });
   }
 
-  final _$carregandoAtom = Atom(name: '_LoginControllerBase.carregando');
+  late final _$carregandoAtom =
+      Atom(name: '_LoginControllerBase.carregando', context: context);
 
   @override
   bool get carregando {
@@ -47,7 +49,8 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$biometriaAtom = Atom(name: '_LoginControllerBase.biometria');
+  late final _$biometriaAtom =
+      Atom(name: '_LoginControllerBase.biometria', context: context);
 
   @override
   bool get biometria {
@@ -62,40 +65,32 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$loginSenhaSalvaAsyncAction =
-      AsyncAction('_LoginControllerBase.loginSenhaSalva');
+  late final _$loginSenhaSalvaAsyncAction =
+      AsyncAction('_LoginControllerBase.loginSenhaSalva', context: context);
 
   @override
   Future<bool> loginSenhaSalva() {
     return _$loginSenhaSalvaAsyncAction.run(() => super.loginSenhaSalva());
   }
 
-  final _$requestResetAsyncAction =
-      AsyncAction('_LoginControllerBase.requestReset');
-
-  @override
-  Future<Usuario> requestReset(String login) {
-    return _$requestResetAsyncAction.run(() => super.requestReset(login));
-  }
-
-  final _$resetPassordInitAsyncAction =
-      AsyncAction('_LoginControllerBase.resetPassordInit');
+  late final _$resetPassordInitAsyncAction =
+      AsyncAction('_LoginControllerBase.resetPassordInit', context: context);
 
   @override
   Future<dynamic> resetPassordInit(String cpf) {
     return _$resetPassordInitAsyncAction.run(() => super.resetPassordInit(cpf));
   }
 
-  final _$redefinirSenhaAsyncAction =
-      AsyncAction('_LoginControllerBase.redefinirSenha');
+  late final _$redefinirSenhaAsyncAction =
+      AsyncAction('_LoginControllerBase.redefinirSenha', context: context);
 
   @override
   Future<dynamic> redefinirSenha() {
     return _$redefinirSenhaAsyncAction.run(() => super.redefinirSenha());
   }
 
-  final _$_LoginControllerBaseActionController =
-      ActionController(name: '_LoginControllerBase');
+  late final _$_LoginControllerBaseActionController =
+      ActionController(name: '_LoginControllerBase', context: context);
 
   @override
   void zerarUsuario() {

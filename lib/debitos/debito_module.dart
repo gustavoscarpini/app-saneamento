@@ -5,8 +5,7 @@ import 'debito_controller.dart';
 import 'debito_page.dart';
 import 'debito_repository.dart';
 
-class DebitoModule extends ChildModule {
-  static Inject get to => Inject<DebitoModule>.of();
+class DebitoModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class DebitoModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => DebitoPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => DebitoPage()),
       ];
 }

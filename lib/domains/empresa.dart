@@ -2,20 +2,20 @@ import 'package:appcontribuinte/domains/alvara.dart';
 import 'package:appcontribuinte/domains/socio.dart';
 
 class Empresa {
-  String tipoPessoa;
-  String pessoa;
-  String tipoAutonomo;
-  String tipoIssqn;
-  List<Socio> socios;
-  List<Alvara> alvaras;
-  String nomeFantasia;
-  String abertura;
-  String naturezaJuridica;
-  String cmc;
-  String classificacaoAtividade;
-  int id;
-  String cpfCnpj;
-  bool autonomo;
+  String? tipoPessoa;
+  String? pessoa;
+  String? tipoAutonomo;
+  String? tipoIssqn;
+  List<Socio>? socios;
+  List<Alvara>? alvaras;
+  String? nomeFantasia;
+  String? abertura;
+  String? naturezaJuridica;
+  String? cmc;
+  String? classificacaoAtividade;
+  int? id;
+  String? cpfCnpj;
+  bool? autonomo;
 
   Empresa(
       {this.tipoPessoa,
@@ -31,7 +31,7 @@ class Empresa {
       this.id,
       this.cpfCnpj,
       this.autonomo}){
-     this.alvaras = List<Alvara>();
+     this.alvaras = [];
   }
 
   Empresa.fromJson(Map<String, dynamic> json) {
@@ -40,9 +40,9 @@ class Empresa {
     tipoAutonomo = json['tipoAutonomo'];
     tipoIssqn = json['tipoIssqn'];
     if (json['socios'] != null) {
-      socios = new List<Socio>();
+      socios = [];
       json['socios'].forEach((v) {
-        socios.add(new Socio.fromJson(v));
+        socios!.add(new Socio.fromJson(v));
       });
     }
     nomeFantasia = json['nomeFantasia'];
@@ -62,7 +62,7 @@ class Empresa {
     data['tipoAutonomo'] = this.tipoAutonomo;
     data['tipoIssqn'] = this.tipoIssqn;
     if (this.socios != null) {
-      data['socios'] = this.socios.map((v) => v.toJson()).toList();
+      data['socios'] = this.socios!.map((v) => v.toJson()).toList();
     }
     data['nomeFantasia'] = this.nomeFantasia;
     data['abertura'] = this.abertura;

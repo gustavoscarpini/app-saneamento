@@ -1,8 +1,8 @@
 import 'package:appcontribuinte/domains/pessoa.dart';
 
 class Usuario {
-  Pessoa pessoa;
-  String token;
+  Pessoa? pessoa;
+  String? token;
 
   Usuario({this.pessoa, this.token});
 
@@ -15,7 +15,7 @@ class Usuario {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.pessoa != null) {
-      data['pessoa'] = this.pessoa.toJson();
+      data['pessoa'] = this.pessoa!.toJson();
     }
     data['token'] = this.token;
     return data;

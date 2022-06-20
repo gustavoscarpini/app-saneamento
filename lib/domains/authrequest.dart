@@ -1,6 +1,6 @@
 class AuthRequest {
-  String username;
-  String password;
+  String? username;
+  String? password;
 
 
   AuthRequest({

@@ -5,8 +5,7 @@ import 'empresa_controller.dart';
 import 'empresa_page.dart';
 import 'empresa_repository.dart';
 
-class EmpresaModule extends ChildModule {
-  static Inject get to => Inject<EmpresaModule>.of();
+class EmpresaModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class EmpresaModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => EmpresaPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => EmpresaPage()),
       ];
 }

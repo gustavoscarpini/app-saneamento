@@ -6,10 +6,11 @@ part of 'debito_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DebitoController on _DebitoControllerBase, Store {
-  final _$debitosAtom = Atom(name: '_DebitoControllerBase.debitos');
+  late final _$debitosAtom =
+      Atom(name: '_DebitoControllerBase.debitos', context: context);
 
   @override
   ObservableList<Debito> get debitos {
@@ -24,7 +25,8 @@ mixin _$DebitoController on _DebitoControllerBase, Store {
     });
   }
 
-  final _$alvarasAtom = Atom(name: '_DebitoControllerBase.alvaras');
+  late final _$alvarasAtom =
+      Atom(name: '_DebitoControllerBase.alvaras', context: context);
 
   @override
   ObservableList<Alvara> get alvaras {
@@ -39,7 +41,8 @@ mixin _$DebitoController on _DebitoControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_DebitoControllerBase.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_DebitoControllerBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -54,29 +57,32 @@ mixin _$DebitoController on _DebitoControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_DebitoControllerBase.user');
+  late final _$userAtom =
+      Atom(name: '_DebitoControllerBase.user', context: context);
 
   @override
-  Usuario get user {
+  Usuario? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(Usuario value) {
+  set user(Usuario? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_DebitoControllerBase.carregar');
+  late final _$carregarAsyncAction =
+      AsyncAction('_DebitoControllerBase.carregar', context: context);
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_DebitoControllerBase.imprimir');
+  late final _$imprimirAsyncAction =
+      AsyncAction('_DebitoControllerBase.imprimir', context: context);
 
   @override
   Future<dynamic> imprimir(Debito debito) {

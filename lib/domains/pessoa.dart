@@ -1,15 +1,15 @@
 import 'package:appcontribuinte/domains/foto.dart';
 
 class Pessoa {
-  int id;
-  String nome;
-  String tipo;
-  String situacaoCadastralPessoa;
-  String rgInscricao;
-  String orgaoEmissor;
-  String cpfCnpj;
-  String email;
-  Foto foto;
+  int? id;
+  String? nome;
+  String? tipo;
+  String? situacaoCadastralPessoa;
+  String? rgInscricao;
+  String? orgaoEmissor;
+  String? cpfCnpj;
+  String? email;
+  Foto? foto;
 
   Pessoa(
       {this.tipo,
@@ -44,7 +44,7 @@ class Pessoa {
     data['cpfCnpj'] = this.cpfCnpj;
     data['email'] = this.email;
     if (this.foto != null) {
-      data['foto'] = this.foto.toJson();
+      data['foto'] = this.foto!.toJson();
     }
     return data;
   }

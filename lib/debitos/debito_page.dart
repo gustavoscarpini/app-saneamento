@@ -19,7 +19,7 @@ class DebitoPage extends StatefulWidget {
 }
 
 class _DebitoPageState extends State<DebitoPage> with Disposable {
-  var debitoController = DebitoModule.to.get<DebitoController>();
+  var debitoController = Modular.get<DebitoController>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final formatter = new NumberFormat("#,##0.00", "pt_BR");
 
@@ -72,7 +72,7 @@ class _DebitoPageState extends State<DebitoPage> with Disposable {
                           alignment: Alignment.topCenter,
                           padding: new EdgeInsets.only(
                               top: 10, right: 10.0, left: 10.0),
-                          child: StaggeredGridView.countBuilder(
+                          child: MasonryGridView.count(
                             crossAxisCount: 1,
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
@@ -131,7 +131,7 @@ class _DebitoPageState extends State<DebitoPage> with Disposable {
                                                   fontSize: 14,
                                                   color: debitoController
                                                           .debitos[index]
-                                                          .vencido
+                                                          .vencido!
                                                       ? Colors.redAccent
                                                       : Colors.black54),
                                             ),
@@ -383,9 +383,6 @@ class _DebitoPageState extends State<DebitoPage> with Disposable {
                               );
                             },
                             itemCount: debitoController.debitos.length,
-                            staggeredTileBuilder: (int index) {
-                              return StaggeredTile.fit(1);
-                            },
                           ),
                         ),
             ),

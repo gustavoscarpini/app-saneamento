@@ -33,7 +33,7 @@ abstract class _HomeControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
@@ -46,7 +46,7 @@ abstract class _HomeControllerBase with Store {
 class Opcao {
   const Opcao({this.titulo, this.icon, this.rota});
 
-  final String titulo;
-  final String rota;
-  final IconData icon;
+  final String? titulo;
+  final String? rota;
+  final IconData? icon;
 }

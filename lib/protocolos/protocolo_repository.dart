@@ -15,7 +15,7 @@ class ProtocoloRepository {
 
   ProtocoloRepository(this._client);
 
-  Future<List<Protocolo>> consultarPorCPF(String cpf) async {
+  Future<List<Protocolo>> consultarPorCPF(String? cpf) async {
     try {
       var response = await _client
           .get("/api/tributario/protocolos/${CPFValidator.strip(cpf)}");
@@ -40,7 +40,7 @@ class ProtocoloRepository {
     }
   }
 
-  Future imprimir(int numero, int ano) async {
+  Future imprimir(int? numero, int? ano) async {
     try {
       var response = await _client.get(
           "/api/tributario/imprimir-protocolo/$numero/$ano");

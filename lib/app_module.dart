@@ -16,9 +16,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_widget.dart';
 
-class AppModule extends MainModule {
-  static Inject get to => Inject<AppModule>.of();
-  Dio client = CustomDio(true).dio;
+class AppModule extends Module {
+  Dio client = CustomDio().dio;
 
   @override
   List<Bind> get binds => [
@@ -29,17 +28,17 @@ class AppModule extends MainModule {
   Widget get bootstrap => AppWidget();
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter('/login', module: LoginModule()),
-        ModularRouter('/home', module: HomeModule()),
-        ModularRouter('/imovel', module: ImovelModule()),
-        ModularRouter('/empresa', module: EmpresaModule()),
-        ModularRouter('/protocolo', module: ProtocoloModule()),
-        ModularRouter('/debito', module: DebitoModule()),
-        ModularRouter('/configuracao', module: ConfigModule()),
-        ModularRouter('/register', module: CadastroUsuarioModule()),
-        ModularRouter('/certidao', module: CertidaoModule()),
-        ModularRouter('/itbi', module: ItbiModule()),
-        ModularRouter('/perfil', module: PerfilModule()),
+  List<ModularRoute> get routes => [
+        ModuleRoute('/', module: LoginModule()),
+        ModuleRoute('/home', module: HomeModule()),
+        ModuleRoute('/imovel', module: ImovelModule()),
+        ModuleRoute('/empresa', module: EmpresaModule()),
+        ModuleRoute('/protocolo', module: ProtocoloModule()),
+        ModuleRoute('/debito', module: DebitoModule()),
+        ModuleRoute('/configuracao', module: ConfigModule()),
+        ModuleRoute('/register', module: CadastroUsuarioModule()),
+        ModuleRoute('/certidao', module: CertidaoModule()),
+        ModuleRoute('/itbi', module: ItbiModule()),
+        ModuleRoute('/perfil', module: PerfilModule()),
       ];
 }

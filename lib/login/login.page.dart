@@ -5,6 +5,7 @@ import 'package:appcontribuinte/components/custom_alert.dart';
 import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'login_controller.dart';
@@ -16,9 +17,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var controller = LoginModule.to.get<LoginController>();
+  var controller = Modular.get<LoginController>();
 
-  Controller _controller;
+  Controller? _controller;
   bool showPassword = false;
 
   @override
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   stops: [0.3, 1]),
             ),
             child: Form(
-              key: _controller.formKey,
+              key: _controller!.formKey,
               child: Column(
                 children: <Widget>[
                   Expanded(
@@ -115,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                                     )
                                   : TextFormField(
                                       controller: controller.loginController,
-                                      validator: (value) => value.isEmpty
+                                      validator: (value) => value!.isEmpty
                                           ? "O Login não pode ser nulo"
                                           : null,
                                       keyboardType: TextInputType.number,
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                               TextFormField(
                                 enabled: !controller.biometria,
                                 controller: controller.passwordController,
-                                validator: (value) => value.isEmpty
+                                validator: (value) => value!.isEmpty
                                     ? "A senha não pode ser nulo"
                                     : null,
                                 keyboardType: TextInputType.text,
@@ -348,7 +349,7 @@ class Controller {
   var formKey = GlobalKey<FormState>();
 
   bool validate() {
-    var form = formKey.currentState;
+    var form = formKey.currentState!;
     if (form.validate()) {
       form.save();
       return true;
@@ -358,7 +359,7 @@ class Controller {
 }
 
 _openEsqueciSenhaModal(
-    context, LoginController controller, Controller _controller) {
+    context, LoginController controller, Controller? _controller) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -387,7 +388,7 @@ _openEsqueciSenhaModal(
                 TextFormField(
                   controller: controller.loginController,
                   validator: (value) =>
-                      value.isEmpty ? "O login não pode ser nulo" : null,
+                      value!.isEmpty ? "O login não pode ser nulo" : null,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       labelText: "Digite o CPF ou CNPJ",

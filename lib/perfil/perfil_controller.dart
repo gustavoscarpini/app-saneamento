@@ -29,7 +29,7 @@ abstract class _PerfilControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
@@ -45,7 +45,7 @@ abstract class _PerfilControllerBase with Store {
     var usuario;
     try {
       usuario =
-          await loginRepo.login(user.pessoa.cpfCnpj, passwordController.text);
+          await loginRepo.login(user!.pessoa!.cpfCnpj, passwordController.text);
     } finally {
       if (usuario == null) {
         mensagemTrocaSenha = "O campo Senha Atual não confere";
@@ -60,7 +60,7 @@ abstract class _PerfilControllerBase with Store {
       return Future.value(0);
     }
     var trocarSenha =
-        repo.trocarSenha(user.pessoa.cpfCnpj, newPasswordController.text);
+        repo.trocarSenha(user!.pessoa!.cpfCnpj, newPasswordController.text);
     mensagemTrocaSenha = "Senha Alterada com sucesso";
     isLoading = false;
     return trocarSenha;

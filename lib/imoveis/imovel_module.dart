@@ -5,8 +5,7 @@ import 'imovel_controller.dart';
 import 'imovel_page.dart';
 import 'imovel_repository.dart';
 
-class ImovelModule extends ChildModule {
-  static Inject get to => Inject<ImovelModule>.of();
+class ImovelModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class ImovelModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => ImovelPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => ImovelPage()),
       ];
 }

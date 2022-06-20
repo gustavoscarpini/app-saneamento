@@ -7,7 +7,7 @@ class PerfilRepository {
   PerfilRepository(this._client);
 
 
-  Future trocarSenha(String cpf, String novaSenha) async {
+  Future trocarSenha(String? cpf, String novaSenha) async {
     try {
       var response = await _client
           .get("/api/alterar-senha?cpf=${CPFValidator.strip(cpf)}&novaSenha=${novaSenha}");

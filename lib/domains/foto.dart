@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class Foto {
-  String foto;
-  String mime;
-  String nome;
-  File file;
+  String? foto;
+  String? mime;
+  String? nome;
+  File? file;
 
   Foto({this.foto, this.mime, this.nome});
 
@@ -28,8 +28,8 @@ class Foto {
   void carregarImagem() {
     print(foto);
     print(mime);
-    if (foto != null && foto.isNotEmpty) {
-      String base = foto.contains(",") ? foto.split(",")[1] : foto;
+    if (foto != null && foto!.isNotEmpty) {
+      String base = foto!.contains(",") ? foto!.split(",")[1] : foto!;
       final decodedBytes = base64Decode(base);
       (getApplicationDocumentsDirectory()).then((value) {
         print("value ::::: $value");
@@ -37,8 +37,8 @@ class Foto {
         print("dir ::::: $dir");
         file = File("$dir/" +
             DateTime.now().millisecondsSinceEpoch.toString() +
-            (mime.contains("/") ? "." + mime.split("/")[1] : "jpeg"));
-        file.writeAsBytes(decodedBytes).then((value) {
+            (mime!.contains("/") ? "." + mime!.split("/")[1] : "jpeg"));
+        file!.writeAsBytes(decodedBytes).then((value) {
           print("file ::::: $dir");
         });
 

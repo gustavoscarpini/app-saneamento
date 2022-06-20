@@ -27,14 +27,14 @@ abstract class _EmpresaControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     empresas.clear();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj).then((value) {
       empresas.addAll(value);
       isLoading = false;
       for (var empresa in empresas) {
@@ -47,22 +47,22 @@ abstract class _EmpresaControllerBase with Store {
   Future carregarAlvaras(Empresa empresa) async {
     isLoading = true;
     empresa.alvaras =
-        await repo.consultarAlvaras(user.pessoa.cpfCnpj, empresa.cmc);
+        await repo.consultarAlvaras(user!.pessoa!.cpfCnpj, empresa.cmc);
     isLoading = false;
   }
 
   @action
-  Future imprimirCadastro(String inscricao) async {
+  Future imprimirCadastro(String? inscricao) async {
     isLoading = true;
-    repo.imprimirCadastro(user.pessoa.cpfCnpj, inscricao).then((value) {
+    repo.imprimirCadastro(user!.pessoa!.cpfCnpj, inscricao).then((value) {
       isLoading = false;
     });
   }
 
   @action
-  Future imprimirAlvara(int alvara) async {
+  Future imprimirAlvara(int? alvara) async {
     isLoading = true;
-    repo.imprimirAlvara(user.pessoa.cpfCnpj, alvara).then((value) {
+    repo.imprimirAlvara(user!.pessoa!.cpfCnpj, alvara).then((value) {
       isLoading = false;
     });
   }

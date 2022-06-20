@@ -1,7 +1,7 @@
 class Evento {
-  String descricao;
-  String identificacao;
-  String valor;
+  String? descricao;
+  String? identificacao;
+  String? valor;
 
   Evento({this.descricao, this.identificacao, this.valor});
 

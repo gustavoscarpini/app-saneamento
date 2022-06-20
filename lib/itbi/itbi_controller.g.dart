@@ -6,10 +6,11 @@ part of 'itbi_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ItbiController on _ItbiControllerBase, Store {
-  final _$itbisAtom = Atom(name: '_ItbiControllerBase.itbis');
+  late final _$itbisAtom =
+      Atom(name: '_ItbiControllerBase.itbis', context: context);
 
   @override
   ObservableList<Itbi> get itbis {
@@ -24,7 +25,8 @@ mixin _$ItbiController on _ItbiControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_ItbiControllerBase.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_ItbiControllerBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -39,7 +41,8 @@ mixin _$ItbiController on _ItbiControllerBase, Store {
     });
   }
 
-  final _$iniciouAtom = Atom(name: '_ItbiControllerBase.iniciou');
+  late final _$iniciouAtom =
+      Atom(name: '_ItbiControllerBase.iniciou', context: context);
 
   @override
   bool get iniciou {
@@ -54,37 +57,40 @@ mixin _$ItbiController on _ItbiControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_ItbiControllerBase.user');
+  late final _$userAtom =
+      Atom(name: '_ItbiControllerBase.user', context: context);
 
   @override
-  Usuario get user {
+  Usuario? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(Usuario value) {
+  set user(Usuario? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_ItbiControllerBase.carregar');
+  late final _$carregarAsyncAction =
+      AsyncAction('_ItbiControllerBase.carregar', context: context);
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_ItbiControllerBase.imprimir');
+  late final _$imprimirAsyncAction =
+      AsyncAction('_ItbiControllerBase.imprimir', context: context);
 
   @override
   Future<dynamic> imprimir(Itbi itbi) {
     return _$imprimirAsyncAction.run(() => super.imprimir(itbi));
   }
 
-  final _$_ItbiControllerBaseActionController =
-      ActionController(name: '_ItbiControllerBase');
+  late final _$_ItbiControllerBaseActionController =
+      ActionController(name: '_ItbiControllerBase', context: context);
 
   @override
   void init() {

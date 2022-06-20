@@ -5,8 +5,7 @@ import 'itbi_controller.dart';
 import 'itbi_page.dart';
 import 'itbi_repository.dart';
 
-class ItbiModule extends ChildModule {
-  static Inject get to => Inject<ItbiModule>.of();
+class ItbiModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class ItbiModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => ItbiPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => ItbiPage()),
       ];
 }

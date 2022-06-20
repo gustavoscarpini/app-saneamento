@@ -12,7 +12,7 @@ class ImovelRepository {
 
   ImovelRepository(this._client);
 
-  Future<List<Imovel>> consultarPorCPF(String cpf) async {
+  Future<List<Imovel>> consultarPorCPF(String? cpf) async {
     try {
       var response = await _client
           .get("/api/tributario/imoveis/${CPFValidator.strip(cpf)}");
@@ -25,7 +25,7 @@ class ImovelRepository {
     }
   }
 
-  Future imprimir(int id) async {
+  Future imprimir(int? id) async {
     try {
       var response = await _client.get(
           "/api/tributario/imprimir-imovel/${id}",

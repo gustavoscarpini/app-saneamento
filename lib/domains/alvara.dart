@@ -1,16 +1,16 @@
 class Alvara {
-  bool podeEmitirAlvara;
-  String tipo;
-  int ano;
-  String situacaoParcela;
-  String cmc;
-  String inicio;
-  String assinaturaDigital;
-  String fim;
-  int id;
-  String emissao;
-  String vencimento;
-  bool provisorio;
+  bool? podeEmitirAlvara;
+  String? tipo;
+  int? ano;
+  String? situacaoParcela;
+  String? cmc;
+  String? inicio;
+  String? assinaturaDigital;
+  String? fim;
+  int? id;
+  String? emissao;
+  String? vencimento;
+  bool? provisorio;
 
   Alvara(
       {this.podeEmitirAlvara,

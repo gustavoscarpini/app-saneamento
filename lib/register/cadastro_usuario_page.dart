@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:appcontribuinte/components/carregando.dart';
 import 'package:appcontribuinte/components/cpf_cnpj_format.dart';
 import 'package:appcontribuinte/components/custom_alert.dart';
@@ -7,9 +9,8 @@ import 'package:appcontribuinte/register/cadastro_usuario_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'cadastro_usuario_module.dart';
 
 class CadastroUsuarioPage extends StatefulWidget {
   @override
@@ -17,8 +18,7 @@ class CadastroUsuarioPage extends StatefulWidget {
 }
 
 class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
-  var _controllerUsuario =
-      CadastroUsuarioModule.to.get<CadastroUsuarioController>();
+  var _controllerUsuario = Modular.get<CadastroUsuarioController>();
 
   @override
   void initState() {
@@ -34,8 +34,8 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
   void _consultarCPF(cpf) {
     _controllerUsuario.consultarCpf().then((value) {
       setState(() {
-        if (_controllerUsuario.register.id != null) {
-          if (_controllerUsuario.register.usuario) {
+        if (_controllerUsuario.register!.id != null) {
+          if (_controllerUsuario.register!.usuario!) {
             CustomAlert.show(context,
                 title: "Atênção",
                 subTitle:
@@ -96,7 +96,7 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
                   Observer(builder: (_) {
                     return Visibility(
                         visible: _controllerUsuario.register != null &&
-                            !_controllerUsuario.register.usuario,
+                            !_controllerUsuario.register!.usuario!,
                         child: Column(
                           children: [
                             InputText(
@@ -115,15 +115,15 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
                               label: "Data de Nascimento",
                               type: TextInputType.datetime,
                               onTap: () async {
-                                DateTime date = DateTime(1900);
+                                DateTime? date = DateTime(1900);
                                 FocusScope.of(context)
                                     .requestFocus(new FocusNode());
 
-                                date = await showDatePicker(
+                                date = await (showDatePicker(
                                     context: context,
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100));
+                                    lastDate: DateTime(2100)) as FutureOr<DateTime>);
 
                                 _controllerUsuario.nascimentoController.text =
                                     Util.clientSideformart.format(date);
@@ -144,7 +144,7 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
         ),
         floatingActionButton: new Visibility(
           visible: _controllerUsuario.register != null &&
-              !_controllerUsuario.register.usuario,
+              !_controllerUsuario.register!.usuario!,
           child: Observer(
             builder: (_) {
               return FloatingActionButton(
@@ -153,12 +153,11 @@ class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
                     if (_controllerUsuario.validarUsuario()) {
                       _controllerUsuario.salvarCadastroUsuario().then((value) {
                         if (value == 200) {
-                          CustomAlert.show(context,
-                              onConfirm: () {
-                                Navigator.of(context)
-                                    .pushNamed("login", arguments: true)
-                                    .then((value) {});
-                              },
+                          CustomAlert.show(context, onConfirm: () {
+                            Navigator.of(context)
+                                .pushNamed("login", arguments: true)
+                                .then((value) {});
+                          },
                               title: "Cadastro realizado",
                               subTitle:
                                   "Foi enviado para o seu email a senha temporária para acesso.",

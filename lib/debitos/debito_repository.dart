@@ -12,7 +12,7 @@ class DebitoRepository {
 
   DebitoRepository(this._client);
 
-  Future<List<Debito>> consultarPorCPF(String cpf) async {
+  Future<List<Debito>> consultarPorCPF(String? cpf) async {
     try {
       var response = await _client
           .get("/api/tributario/debitos/${CPFValidator.strip(cpf)}");
