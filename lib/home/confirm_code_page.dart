@@ -95,10 +95,23 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
                               padding: const EdgeInsets.all(10),
                               child: Container(
                                 child: homeController.isLoading
-                                    ? Center(
-                                        child: Carregando(
-                                        inverter: true,
-                                      ))
+                                    ? Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Center(
+                                              child: Carregando(
+                                            inverter: true,
+                                          )),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Center(
+                                              child: Text(
+                                            "Validando Dispositivo",
+                                            style: GoogleFonts.raleway(),
+                                          )),
+                                        ],
+                                      )
                                     : painelCodeDigits(context),
                               )),
                         ),
@@ -116,7 +129,6 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
 
   Container painelCodeDigits(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.only(left: 10, top: 20, right: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -183,10 +195,10 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
                     style: GoogleFonts.raleway(
                         fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                 onPressed: () async {
-                  homeController.solicitarAcessoAoDispositivo().then((value) {
-                    setState(() {
-                      //so p recarregar
-                    });
+                  setState(() {
+                    homeController
+                        .solicitarAcessoAoDispositivo()
+                        .then((value) {});
                   });
                 }),
           ],

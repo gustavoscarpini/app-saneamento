@@ -57,17 +57,19 @@ abstract class _HomeControllerBase with Store {
   Future solicitarAcessoAoDispositivo() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
-    String deviceName = await DeviceInformation.deviceModel + " (" +await DeviceInformation.deviceName + ")";
+    String deviceName = await getDeviceId();
     solicitacaoDispositivo = await this
         .repo
         .solicitarAcessoAoDispositivo(user!.pessoa!.cpfCnpj, deviceName);
     isLoading = false;
   }
 
+  Future<String> getDeviceId() async => await DeviceInformation.deviceModel + " (" +await DeviceInformation.deviceName + ")";
+
   @action
   Future confirmarDispositivo(String codigo) async {
     isLoading = true;
-    String deviceName = await DeviceInformation.deviceModel;
+    String deviceName = await getDeviceId();
     validouCodigo = await this.repo.confirmarAcessoAoDispositivo(
         user!.pessoa!.cpfCnpj, deviceName, codigo);
     isLoading = false;
