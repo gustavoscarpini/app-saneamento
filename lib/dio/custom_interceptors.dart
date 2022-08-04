@@ -16,6 +16,7 @@ class CustomInterceptors extends Interceptor {
     Usuario? user = GetIt.instance<Usuario>();
     if (user != null && user.token != null && user.token!.isNotEmpty && usaToken) {
       try {
+        print("Bearer " + user.token!);
         options.headers["Authorization"] = "Bearer " + user.token!;
       } on DioError catch (e) {
         print("ERRO AO PEGAR O TOKEN ${e.error}");

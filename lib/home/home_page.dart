@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:appcontribuinte/components/custom_alert.dart';
 import 'package:appcontribuinte/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../domains/usuario.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with Disposable {
   var homeController = Modular.get<HomeController>();
-
   late Timer _everySecond;
 
   @override
@@ -28,10 +27,7 @@ class _HomePageState extends State<HomePage> with Disposable {
     homeController.carregar().then((value) {
       if (homeController.user != null) {
         setState(() {
-          CustomAlert.show(context,
-              title: "Olá ${homeController.user!.pessoa!.nome}",
-              subTitle: "Seja bem vindo!",
-              style: AlertStyle.success);
+          //TODO something
         });
       }
     });
@@ -105,7 +101,9 @@ class _HomePageState extends State<HomePage> with Disposable {
                                   Icons.notifications,
                                   color: Colors.white,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+
+                                },
                               )
                             ],
                           ),
@@ -227,15 +225,15 @@ class _HomePageState extends State<HomePage> with Disposable {
                                                 homeController
                                                         .user!.pessoa!.foto !=
                                                     null &&
-                                                homeController.user!.pessoa!.foto!
-                                                        .file !=
+                                                homeController.user!.pessoa!
+                                                        .foto!.file !=
                                                     null
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(50),
                                                 child: Image.file(
-                                                  homeController
-                                                      .user!.pessoa!.foto!.file!,
+                                                  homeController.user!.pessoa!
+                                                      .foto!.file!,
                                                   width: 100,
                                                   height: 100,
                                                   fit: BoxFit.fill,
@@ -276,8 +274,11 @@ class _HomePageState extends State<HomePage> with Disposable {
                                     context,
                                     homeController,
                                     homeController.opcoes[index].titulo,
-                                    () => Modular.to.pushNamed("/"+
-                                            homeController.opcoes[index].rota!,
+                                    () => Modular.to
+                                        .pushNamed(
+                                            "/" +
+                                                homeController
+                                                    .opcoes[index].rota!,
                                             arguments: true)
                                         .then((value) {}),
                                     Icon(
@@ -326,3 +327,4 @@ addItemActionListener(context, homeController, text, onTap, icon) => Card(
             ]),
       ),
     ));
+

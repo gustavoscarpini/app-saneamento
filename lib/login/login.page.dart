@@ -202,8 +202,12 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: () async {
                                             controller.login().then((value) {
                                               if (value) {
+
+                                                //TODO consultar dispositivos
                                                 Navigator.pushReplacementNamed(
-                                                    context, "home");
+                                                    context, "/home/confirm");
+
+
                                               } else {
                                                 CustomAlert.show(context,
                                                     title:

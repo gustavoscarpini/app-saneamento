@@ -25,6 +25,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$validouCodigoAtom =
+      Atom(name: '_HomeControllerBase.validouCodigo', context: context);
+
+  @override
+  bool get validouCodigo {
+    _$validouCodigoAtom.reportRead();
+    return super.validouCodigo;
+  }
+
+  @override
+  set validouCodigo(bool value) {
+    _$validouCodigoAtom.reportWrite(value, super.validouCodigo, () {
+      super.validouCodigo = value;
+    });
+  }
+
   late final _$userAtom =
       Atom(name: '_HomeControllerBase.user', context: context);
 
@@ -41,6 +57,23 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$solicitacaoDispositivoAtom = Atom(
+      name: '_HomeControllerBase.solicitacaoDispositivo', context: context);
+
+  @override
+  SolicitacaoDispositivo? get solicitacaoDispositivo {
+    _$solicitacaoDispositivoAtom.reportRead();
+    return super.solicitacaoDispositivo;
+  }
+
+  @override
+  set solicitacaoDispositivo(SolicitacaoDispositivo? value) {
+    _$solicitacaoDispositivoAtom
+        .reportWrite(value, super.solicitacaoDispositivo, () {
+      super.solicitacaoDispositivo = value;
+    });
+  }
+
   late final _$carregarAsyncAction =
       AsyncAction('_HomeControllerBase.carregar', context: context);
 
@@ -49,11 +82,32 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
+  late final _$solicitarAcessoAoDispositivoAsyncAction = AsyncAction(
+      '_HomeControllerBase.solicitarAcessoAoDispositivo',
+      context: context);
+
+  @override
+  Future<dynamic> solicitarAcessoAoDispositivo() {
+    return _$solicitarAcessoAoDispositivoAsyncAction
+        .run(() => super.solicitarAcessoAoDispositivo());
+  }
+
+  late final _$confirmarDispositivoAsyncAction =
+      AsyncAction('_HomeControllerBase.confirmarDispositivo', context: context);
+
+  @override
+  Future<dynamic> confirmarDispositivo(String codigo) {
+    return _$confirmarDispositivoAsyncAction
+        .run(() => super.confirmarDispositivo(codigo));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-user: ${user}
+validouCodigo: ${validouCodigo},
+user: ${user},
+solicitacaoDispositivo: ${solicitacaoDispositivo}
     ''';
   }
 }
