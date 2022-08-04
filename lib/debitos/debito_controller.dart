@@ -33,14 +33,14 @@ abstract class _DebitoControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     debitos.clear();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj).then((value) {
       debitos.addAll(value);
       isLoading = false;
     });

@@ -3,6 +3,7 @@ import 'package:appcontribuinte/config/config_controller.dart';
 import 'package:appcontribuinte/config/config_module.dart';
 import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfigPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class ConfigPage extends StatefulWidget {
 }
 
 class _ConfigPageState extends State<ConfigPage> {
-  var configController = ConfigModule.to.get<ConfigController>();
+  var configController = Modular.get<ConfigController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           children: <Widget>[
                             Center(
                               child: Text(
-                                "${configController.usuario.pessoa.nome}",
+                                "${configController.usuario?.pessoa!.nome}",
                                 style: GoogleFonts.raleway(
                                   color: Colors.white,
                                   fontSize: 16,

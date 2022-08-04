@@ -5,8 +5,7 @@ import 'certidao_controller.dart';
 import 'certidao_page.dart';
 import 'certidao_repository.dart';
 
-class CertidaoModule extends ChildModule {
-  static Inject get to => Inject<CertidaoModule>.of();
+class CertidaoModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class CertidaoModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => CertidaoPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => CertidaoPage()),
       ];
 }

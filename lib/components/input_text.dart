@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputText extends StatelessWidget {
-  final String label;
-  final TextInputFormatter formatter;
-  final TextEditingController controller;
-  final Function onSubmitted;
-  final Function onTap;
+  final String? label;
+  final TextInputFormatter? formatter;
+  final TextEditingController? controller;
+  final Function? onSubmitted;
+  final Function? onTap;
   final TextInputType type;
 
   const InputText({
-    Key key,
+    Key? key,
     this.label,
     this.formatter,
     this.controller,
@@ -22,13 +22,13 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      inputFormatters: formatter != null ? [formatter]: null,
+      inputFormatters: formatter != null ? [formatter!]: null,
       keyboardType: type,
       controller: controller,
-      onSubmitted: onSubmitted,
-      onTap: onTap,
+      onSubmitted: onSubmitted as void Function(String)?,
+      onTap: onTap as void Function()?,
       decoration: InputDecoration(
-          helperText: controller.text.isEmpty
+          helperText: controller!.text.isEmpty
               ? 'Informe o campo $label'
               : null,
           labelText: "$label",

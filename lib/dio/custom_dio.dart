@@ -1,66 +1,17 @@
-
-import 'package:appcontribuinte/domains/usuario.dart';
-import 'package:appcontribuinte/login/login_repository.dart';
+import 'package:appcontribuinte/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constants.dart';
+import 'custom_interceptors.dart';
 
 class CustomDio {
-  Dio _dio;
+  final Dio _dio = Dio();
   final bool usaToken;
 
-  CustomDio(this.usaToken) {
-    if (_dio == null) {
-      _dio = Dio();
-      if (usaToken) {
-        _dio.interceptors.clear();
-        _dio.interceptors
-            .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-          print("REQUEST[${options.method}] => PATH:${options.baseUrl + options.path}");
-          Usuario user = GetIt.instance<Usuario>();
-          if (user != null && user.token != null && user.token.isNotEmpty) {
-            try {
-              options.headers["Authorization"] = "Bearer " + user.token;
-            } on DioError catch (e) {
-              print("ERRO AO PEGAR O TOKEN ${e.error}");
-            }
-          }
-          return options;
-        }, onResponse: (Response response) {
-          print(
-              "RESPONSE: [${response.statusCode}] => PATH: [${response.request.path}] => DATA: [${response.data}]");
-          // Do something with response data
-          return response; // continue
-        }, onError: (DioError error) async {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          print(
-              "ERROR[${error.response?.statusCode}] => PATH: ${error.request.path}"); // Do something with response error
-
-          if (error.response?.statusCode == 401) {
-            Options options = error.response.request;
-            String login = prefs.getString(KEY_USERLOGIN);
-            String senha = prefs.getString(KEY_PASSWORD);
-            if (login != null &&
-                login.isNotEmpty &&
-                senha != null &&
-                senha.isNotEmpty) {
-              LoginRepository _loginRepository = LoginRepository(_dio);
-              _loginRepository.login(login, senha).then((e) {
-                //repeat
-                return _dio.request(error.response.request.path,
-                    options: options);
-              });
-            }
-          }
-          return error;
-        }));
-      }
-      _dio.options.baseUrl = BASE_URL;
-      _dio.options.connectTimeout = 150000;
-    }
+  CustomDio({this.usaToken: true}) {
+    _dio.interceptors.clear();
+    _dio.interceptors.add(CustomInterceptors(_dio, usaToken));
+    _dio.options.baseUrl = BASE_URL;
+    _dio.options.connectTimeout = 50000;
   }
 
   Dio get dio => _dio;

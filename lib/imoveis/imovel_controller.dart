@@ -25,21 +25,21 @@ abstract class _ImovelControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     imoveis.clear();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj).then((value) {
       imoveis.addAll(value);
       isLoading = false;
     });
   }
 
   @action
-  Future imprimir(int id) async {
+  Future imprimir(int? id) async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     repo.imprimir(id).then((value) {

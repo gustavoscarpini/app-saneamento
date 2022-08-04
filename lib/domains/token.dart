@@ -1,9 +1,9 @@
 class Token {
-  String accessToken;
-  String tokenType;
-  String refreshToken;
-  int expiresIn;
-  String scope;
+  String? accessToken;
+  String? tokenType;
+  String? refreshToken;
+  int? expiresIn;
+  String? scope;
 
   Token(
       {this.accessToken,

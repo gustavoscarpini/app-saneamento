@@ -18,7 +18,7 @@ class ProtocoloPage extends StatefulWidget {
 }
 
 class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
-  var protocoloController = ProtocoloModule.to.get<ProtocoloController>();
+  var protocoloController = Modular.get<ProtocoloController>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -70,7 +70,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                           alignment: Alignment.topCenter,
                           padding: new EdgeInsets.only(
                               top: 10, right: 10.0, left: 10.0),
-                          child: StaggeredGridView.countBuilder(
+                          child: MasonryGridView.count(
                             crossAxisCount: 1,
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
@@ -182,7 +182,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                   null &&
                                               protocoloController
                                                   .protocolos[index]
-                                                  .tramites
+                                                  .tramites!
                                                   .isNotEmpty,
                                           child: Padding(
                                             padding:
@@ -192,7 +192,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                 child: ListView.separated(
                                                   itemCount: protocoloController
                                                       .protocolos[index]
-                                                      .tramites
+                                                      .tramites!
                                                       .length,
                                                   shrinkWrap: true,
                                                   itemBuilder:
@@ -210,7 +210,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                               const EdgeInsets
                                                                   .only(top: 5),
                                                           child: Text(
-                                                              '${protocoloController.protocolos[index].tramites[index2].indice + 1}º Trâmite',
+                                                              '${protocoloController.protocolos[index].tramites![index2].indice! + 1}º Trâmite',
                                                               style: GoogleFonts
                                                                   .raleway()),
                                                         ),
@@ -223,7 +223,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].origem}",
+                                                          "${protocoloController.protocolos[index].tramites![index2].origem}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -245,7 +245,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].conclusao == null ? '' : protocoloController.protocolos[index].tramites[index2].conclusao}",
+                                                          "${protocoloController.protocolos[index].tramites![index2].conclusao == null ? '' : protocoloController.protocolos[index].tramites![index2].conclusao}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -266,7 +266,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].destino == null ? '' : protocoloController.protocolos[index].tramites[index2].destino}",
+                                                          "${protocoloController.protocolos[index].tramites![index2].destino == null ? '' : protocoloController.protocolos[index].tramites![index2].destino}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -287,7 +287,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].tramites[index2].aceite == null ? '' : protocoloController.protocolos[index].tramites[index2].aceite}",
+                                                          "${protocoloController.protocolos[index].tramites![index2].aceite == null ? '' : protocoloController.protocolos[index].tramites![index2].aceite}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -328,7 +328,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                   null &&
                                               protocoloController
                                                   .protocolos[index]
-                                                  .documentos
+                                                  .documentos!
                                                   .isNotEmpty,
                                           child: Padding(
                                             padding:
@@ -338,7 +338,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                 child: ListView.separated(
                                                   itemCount: protocoloController
                                                       .protocolos[index]
-                                                      .documentos
+                                                      .documentos!
                                                       .length,
                                                   shrinkWrap: true,
                                                   itemBuilder:
@@ -360,7 +360,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].documentos[index2].nome}",
+                                                          "${protocoloController.protocolos[index].documentos![index2].nome}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -381,7 +381,7 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                                                                   .raleway()),
                                                         ),
                                                         Text(
-                                                          "${protocoloController.protocolos[index].documentos[index2].numero}",
+                                                          "${protocoloController.protocolos[index].documentos![index2].numero}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -444,9 +444,9 @@ class _ProtocoloPageState extends State<ProtocoloPage> with Disposable {
                               );
                             },
                             itemCount: protocoloController.protocolos.length,
-                            staggeredTileBuilder: (int index) {
-                              return StaggeredTile.fit(1);
-                            },
+                            // staggeredTileBuilder: (int index) {
+                            //   return StaggeredTile.fit(1);
+                            // },
                           ),
                         ),
             ),

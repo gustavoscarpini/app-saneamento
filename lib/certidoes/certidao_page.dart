@@ -19,7 +19,7 @@ class CertidaoPage extends StatefulWidget {
 }
 
 class _CertidaoPageState extends State<CertidaoPage> with Disposable {
-  var certidaoController = CertidaoModule.to.get<CertidaoController>();
+  var certidaoController = Modular.get<CertidaoController>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final dateFormatter = new DateFormat("yyyy-MM-dd");
   final localDateFormatter = new DateFormat("dd/MM/yyyy");
@@ -91,15 +91,13 @@ class _CertidaoPageState extends State<CertidaoPage> with Disposable {
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500)),
                           )
-                    : StaggeredGridView.countBuilder(
+                    : MasonryGridView.count(
                         crossAxisCount: 1,
                         mainAxisSpacing: 4.0,
                         crossAxisSpacing: 4.0,
                         itemCount: certidaoController.certidaos.length,
                         controller: _scrollController,
-                        staggeredTileBuilder: (int index) {
-                          return StaggeredTile.fit(1);
-                        },
+
                         itemBuilder: (context, index) {
                           return Container(
                             child: Card(
@@ -145,12 +143,12 @@ class _CertidaoPageState extends State<CertidaoPage> with Disposable {
                                         padding:
                                             const EdgeInsets.only(bottom: 10),
                                         child: Text(
-                                          "${certidaoController.certidaos[index].vencida ? 'Vencida em' : 'Vencimento em'} ${localDateFormatter.format(dateFormatter.parse(certidaoController.certidaos[index].validade))}",
+                                          "${certidaoController.certidaos[index].vencida! ? 'Vencida em' : 'Vencimento em'} ${localDateFormatter.format(dateFormatter.parse(certidaoController.certidaos[index].validade!))}",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.raleway(
                                               fontSize: 14,
                                               color: certidaoController
-                                                      .certidaos[index].vencida
+                                                      .certidaos[index].vencida!
                                                   ? Colors.redAccent
                                                   : Colors.black54),
                                         ),
@@ -186,7 +184,7 @@ class _CertidaoPageState extends State<CertidaoPage> with Disposable {
                                               Text('Emissão',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${localDateFormatter.format(dateFormatter.parse(certidaoController.certidaos[index].dataSolicitacao))}",
+                                                "${localDateFormatter.format(dateFormatter.parse(certidaoController.certidaos[index].dataSolicitacao!))}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,

@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 abstract class CustomAlert {
   static void show(BuildContext context,
-      {String title,
-      String subTitle,
-      AlertStyle style,
-      Function onConfirm,
+      {String? title,
+      String? subTitle,
+      AlertStyle? style,
+      Function? onConfirm,
       String textConfirm: "Continuar", bool isDismissible:true}) {
     showModalBottomSheet(
         isDismissible: isDismissible,

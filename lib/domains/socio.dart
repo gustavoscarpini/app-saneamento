@@ -1,6 +1,6 @@
 class Socio {
-  double proporcao;
-  String socio;
+  double? proporcao;
+  String? socio;
 
   Socio({this.proporcao, this.socio});
 

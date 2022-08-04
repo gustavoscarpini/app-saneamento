@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import 'itbi_controller.dart';
-import 'itbi_module.dart';
 
 class ItbiPage extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class ItbiPage extends StatefulWidget {
 }
 
 class _ItbiPageState extends State<ItbiPage> with Disposable {
-  var itbiController = ItbiModule.to.get<ItbiController>();
+  var itbiController = Modular.get<ItbiController>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final dateFormatter = new DateFormat("yyyy-MM-dd");
   final localDateFormatter = new DateFormat("dd/MM/yyyy");
@@ -90,15 +89,12 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500)),
                           )
-                    : StaggeredGridView.countBuilder(
+                    : MasonryGridView.count(
                         crossAxisCount: 1,
                         mainAxisSpacing: 4.0,
                         crossAxisSpacing: 4.0,
                         itemCount: itbiController.itbis.length,
                         controller: _scrollController,
-                        staggeredTileBuilder: (int index) {
-                          return StaggeredTile.fit(1);
-                        },
                         itemBuilder: (context, index) {
                           return Container(
                             child: Card(
@@ -151,7 +147,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Setor',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.setor}",
+                                                "${itbiController.itbis[index].imovel!.setor}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -169,7 +165,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Quadra',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.quadra}",
+                                                "${itbiController.itbis[index].imovel!.quadra}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -187,7 +183,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Lote',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.lote}",
+                                                "${itbiController.itbis[index].imovel!.lote}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -205,7 +201,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Área',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.areaTerreno}",
+                                                "${itbiController.itbis[index].imovel!.areaTerreno}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -232,8 +228,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Logradouro',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.lograouro} ${itbiController.itbis[index].imovel.numero != null ?
-                                                ', nº' +itbiController.itbis[index].imovel.numero: ''} ",
+                                                "${itbiController.itbis[index].imovel!.lograouro} ${itbiController.itbis[index].imovel!.numero != null ? ', nº' + itbiController.itbis[index].imovel!.numero! : ''} ",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -260,7 +255,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               Text('Bairro',
                                                   style: GoogleFonts.raleway()),
                                               Text(
-                                                "${itbiController.itbis[index].imovel.bairro}",
+                                                "${itbiController.itbis[index].imovel!.bairro}",
                                                 style: GoogleFonts.raleway(
                                                     fontSize: 16,
                                                     color: Colors.black54,
@@ -276,45 +271,45 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                       height: 10,
                                     ),
                                     Visibility(
-                                      visible: itbiController.itbis[index].imovel
-                                          .construcoes !=
-                                          null &&
-                                          itbiController.itbis[index].imovel.construcoes.isNotEmpty,
+                                      visible: itbiController.itbis[index]
+                                                  .imovel!.construcoes !=
+                                              null &&
+                                          itbiController.itbis[index].imovel!
+                                              .construcoes!.isNotEmpty,
                                       child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 10),
+                                        padding: const EdgeInsets.only(top: 10),
                                         child: Container(
                                             alignment: Alignment.topCenter,
                                             child: ListView.separated(
-                                              itemCount: itbiController.itbis[index].imovel.construcoes
+                                              itemCount: itbiController
+                                                  .itbis[index]
+                                                  .imovel!
+                                                  .construcoes!
                                                   .length,
                                               shrinkWrap: true,
-                                              itemBuilder:
-                                                  (context, index2) {
+                                              itemBuilder: (context, index2) {
                                                 return Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .start,
+                                                      MainAxisAlignment.start,
                                                   children: <Widget>[
                                                     Expanded(
                                                       child: Column(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: <Widget>[
                                                           Text('Construção',
                                                               style: GoogleFonts
                                                                   .raleway()),
                                                           Text(
-                                                            "${itbiController.itbis[index].imovel.construcoes[index2].descricao}",
+                                                            "${itbiController.itbis[index].imovel!.construcoes![index2].descricao}",
                                                             style: GoogleFonts.raleway(
-                                                                fontSize:
-                                                                16,
+                                                                fontSize: 16,
                                                                 color: Colors
                                                                     .black54,
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
                                                         ],
                                                       ),
@@ -322,23 +317,22 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                                     Expanded(
                                                       child: Column(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: <Widget>[
                                                           Text(
                                                               'Área Construída',
                                                               style: GoogleFonts
                                                                   .raleway()),
                                                           Text(
-                                                            "${itbiController.itbis[index].imovel.construcoes[index2].area}",
+                                                            "${itbiController.itbis[index].imovel!.construcoes![index2].area}",
                                                             style: GoogleFonts.raleway(
-                                                                fontSize:
-                                                                16,
+                                                                fontSize: 16,
                                                                 color: Colors
                                                                     .black54,
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
                                                         ],
                                                       ),
@@ -348,7 +342,7 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                               },
                                               separatorBuilder:
                                                   (BuildContext context,
-                                                  int index) {
+                                                      int index) {
                                                 return Divider(
                                                   height: 1,
                                                 );
@@ -360,47 +354,48 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                       height: 10,
                                     ),
                                     Visibility(
-                                      visible: itbiController.itbis[index].transmitentes !=
-                                          null &&
-                                          itbiController.itbis[index].transmitentes.isNotEmpty,
+                                      visible: itbiController
+                                                  .itbis[index].transmitentes !=
+                                              null &&
+                                          itbiController.itbis[index]
+                                              .transmitentes!.isNotEmpty,
                                       child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 10),
+                                        padding: const EdgeInsets.only(top: 10),
                                         child: Container(
                                             alignment: Alignment.topCenter,
                                             child: ListView.separated(
-                                              itemCount: itbiController.itbis[index].transmitentes
+                                              itemCount: itbiController
+                                                  .itbis[index]
+                                                  .transmitentes!
                                                   .length,
                                               shrinkWrap: true,
-                                              itemBuilder:
-                                                  (context, index2) {
+                                              itemBuilder: (context, index2) {
                                                 return Column(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .start,
+                                                      MainAxisAlignment.start,
                                                   children: <Widget>[
                                                     Text('Transmitente',
                                                         style: GoogleFonts
                                                             .raleway()),
                                                     Text(
-                                                      "${itbiController.itbis[index].transmitentes[index2].nome}",
+                                                      "${itbiController.itbis[index].transmitentes![index2].nome}",
                                                       textAlign:
-                                                      TextAlign.center,
-                                                      style: GoogleFonts
-                                                          .raleway(
-                                                          fontSize: 16,
-                                                          color: Colors
-                                                              .black54,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold),
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.raleway(
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .black54,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
                                                     ),
                                                   ],
                                                 );
                                               },
                                               separatorBuilder:
                                                   (BuildContext context,
-                                                  int index) {
+                                                      int index) {
                                                 return Divider(
                                                   height: 1,
                                                 );
@@ -412,47 +407,48 @@ class _ItbiPageState extends State<ItbiPage> with Disposable {
                                       height: 10,
                                     ),
                                     Visibility(
-                                      visible: itbiController.itbis[index].adquirentes !=
-                                          null &&
-                                          itbiController.itbis[index].adquirentes.isNotEmpty,
+                                      visible: itbiController
+                                                  .itbis[index].adquirentes !=
+                                              null &&
+                                          itbiController.itbis[index]
+                                              .adquirentes!.isNotEmpty,
                                       child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 10),
+                                        padding: const EdgeInsets.only(top: 10),
                                         child: Container(
                                             alignment: Alignment.topCenter,
                                             child: ListView.separated(
-                                              itemCount: itbiController.itbis[index].adquirentes
+                                              itemCount: itbiController
+                                                  .itbis[index]
+                                                  .adquirentes!
                                                   .length,
                                               shrinkWrap: true,
-                                              itemBuilder:
-                                                  (context, index2) {
+                                              itemBuilder: (context, index2) {
                                                 return Column(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .start,
+                                                      MainAxisAlignment.start,
                                                   children: <Widget>[
                                                     Text('Adquirentes',
                                                         style: GoogleFonts
                                                             .raleway()),
                                                     Text(
-                                                      "${itbiController.itbis[index].adquirentes[index2].nome}",
+                                                      "${itbiController.itbis[index].adquirentes![index2].nome}",
                                                       textAlign:
-                                                      TextAlign.center,
-                                                      style: GoogleFonts
-                                                          .raleway(
-                                                          fontSize: 16,
-                                                          color: Colors
-                                                              .black54,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold),
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.raleway(
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .black54,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
                                                     ),
                                                   ],
                                                 );
                                               },
                                               separatorBuilder:
                                                   (BuildContext context,
-                                                  int index) {
+                                                      int index) {
                                                 return Divider(
                                                   height: 1,
                                                 );

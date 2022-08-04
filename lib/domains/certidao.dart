@@ -1,13 +1,13 @@
 class Certidao {
-  int id;
-  int codigo;
-  String tipoDocumento;
-  String tipoCadastro;
-  String cadastro;
-  String situacao;
-  bool vencida;
-  String dataSolicitacao;
-  String validade;
+  int? id;
+  int? codigo;
+  String? tipoDocumento;
+  String? tipoCadastro;
+  String? cadastro;
+  String? situacao;
+  bool? vencida;
+  String? dataSolicitacao;
+  String? validade;
 
   Certidao(
       {this.id,

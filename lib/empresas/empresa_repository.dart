@@ -15,7 +15,7 @@ class EmpresaRepository {
 
   EmpresaRepository(this._client);
 
-  Future<List<Empresa>> consultarPorCPF(String cpf) async {
+  Future<List<Empresa>> consultarPorCPF(String? cpf) async {
     try {
       var response = await _client
           .get("/api/tributario/empresas/${CPFValidator.strip(cpf)}");
@@ -27,7 +27,7 @@ class EmpresaRepository {
     }
   }
 
-  Future<List<Alvara>> consultarAlvaras(String cpf, String inscricao) async {
+  Future<List<Alvara>> consultarAlvaras(String? cpf, String? inscricao) async {
     try {
       var response = await _client.get(
           "/api/tributario/alvaras/${CPFValidator.strip(cpf)}/${inscricao}");
@@ -40,7 +40,7 @@ class EmpresaRepository {
     }
   }
 
-  Future imprimirCadastro(String cpf, String inscricao) async {
+  Future imprimirCadastro(String? cpf, String? inscricao) async {
     try {
       var response = await _client.get(
           "/api/tributario/imprimir-empresa/${CPFValidator.strip(cpf)}/${inscricao}");
@@ -60,7 +60,7 @@ class EmpresaRepository {
     }
   }
 
-  Future imprimirAlvara(String cpf, int alvara) async {
+  Future imprimirAlvara(String? cpf, int? alvara) async {
     try {
       var response = await _client.get(
           "/api/tributario/imprimir-alvara/${CPFValidator.strip(cpf)}/${alvara}");

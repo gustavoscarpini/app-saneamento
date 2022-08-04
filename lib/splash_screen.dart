@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   void navigationToNextPage() {
-    Navigator.pushReplacementNamed(context, "/login");
+    Modular.to.pushReplacementNamed("/login/");
   }
 
   startSplashScreenTimer() async {

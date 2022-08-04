@@ -27,21 +27,21 @@ abstract class _ProtocoloControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
     protocolos.clear();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj).then((value) {
       protocolos.addAll(value);
       isLoading = false;
     });
   }
 
   @action
-  Future imprimir(int numero, int ano) async {
+  Future imprimir(int? numero, int? ano) async {
     isLoading = true;
     repo.imprimir(numero, ano).then((value) {
       isLoading = false;

@@ -12,7 +12,7 @@ class CertidaoRepository {
 
   CertidaoRepository(this._client);
 
-  Future<List<Certidao>> consultarPorCPF(String cpf, int first) async {
+  Future<List<Certidao>> consultarPorCPF(String? cpf, int? first) async {
     try {
       var response = await _client
           .get("/api/tributario/certidoes/${CPFValidator.strip(cpf)}?first=$first");

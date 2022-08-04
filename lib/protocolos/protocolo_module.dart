@@ -5,8 +5,7 @@ import 'protocolo_controller.dart';
 import 'protocolo_page.dart';
 import 'protocolo_repository.dart';
 
-class ProtocoloModule extends ChildModule {
-  static Inject get to => Inject<ProtocoloModule>.of();
+class ProtocoloModule extends Module {
 
   @override
   List<Bind> get binds => [
@@ -15,7 +14,7 @@ class ProtocoloModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter("/", child: (context, args) => ProtocoloPage()),
+  List<ModularRoute> get routes => [
+        ChildRoute("/", child: (context, args) => ProtocoloPage()),
       ];
 }

@@ -1,14 +1,14 @@
 import 'package:appcontribuinte/domains/util.dart';
 
 class Register {
-  int id;
-  String nome;
-  String cpf;
-  String email;
-  String nomeMae;
-  String mensagem;
-  DateTime nascimento;
-  bool usuario;
+  int? id;
+  String? nome;
+  String? cpf;
+  String? email;
+  String? nomeMae;
+  String? mensagem;
+  DateTime? nascimento;
+  bool? usuario;
 
   Register(
       {this.id,
@@ -40,7 +40,7 @@ class Register {
     data['cpf'] = this.cpf;
     data['email'] = this.email;
     data['nomeMae'] = this.nomeMae;
-    data['nascimento'] = Util.serverSideFormart.format(this.nascimento);
+    data['nascimento'] = Util.serverSideFormart.format(this.nascimento!);
     data['mensagem'] = this.mensagem;
     data['usuario'] = this.usuario;
     return data;

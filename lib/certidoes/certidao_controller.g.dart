@@ -6,10 +6,11 @@ part of 'certidao_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CertidaoController on _CertidaoControllerBase, Store {
-  final _$certidaosAtom = Atom(name: '_CertidaoControllerBase.certidaos');
+  late final _$certidaosAtom =
+      Atom(name: '_CertidaoControllerBase.certidaos', context: context);
 
   @override
   ObservableList<Certidao> get certidaos {
@@ -24,7 +25,8 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_CertidaoControllerBase.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_CertidaoControllerBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -39,7 +41,8 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$iniciouAtom = Atom(name: '_CertidaoControllerBase.iniciou');
+  late final _$iniciouAtom =
+      Atom(name: '_CertidaoControllerBase.iniciou', context: context);
 
   @override
   bool get iniciou {
@@ -54,37 +57,40 @@ mixin _$CertidaoController on _CertidaoControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_CertidaoControllerBase.user');
+  late final _$userAtom =
+      Atom(name: '_CertidaoControllerBase.user', context: context);
 
   @override
-  Usuario get user {
+  Usuario? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(Usuario value) {
+  set user(Usuario? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_CertidaoControllerBase.carregar');
+  late final _$carregarAsyncAction =
+      AsyncAction('_CertidaoControllerBase.carregar', context: context);
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_CertidaoControllerBase.imprimir');
+  late final _$imprimirAsyncAction =
+      AsyncAction('_CertidaoControllerBase.imprimir', context: context);
 
   @override
   Future<dynamic> imprimir(Certidao certidao) {
     return _$imprimirAsyncAction.run(() => super.imprimir(certidao));
   }
 
-  final _$_CertidaoControllerBaseActionController =
-      ActionController(name: '_CertidaoControllerBase');
+  late final _$_CertidaoControllerBaseActionController =
+      ActionController(name: '_CertidaoControllerBase', context: context);
 
   @override
   void init() {

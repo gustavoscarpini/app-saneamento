@@ -17,7 +17,7 @@ abstract class _CertidaoControllerBase with Store {
     this.repo,
   );
 
-  int page;
+  int? page;
 
   @observable
   ObservableList<Certidao> certidaos = ObservableList();
@@ -29,7 +29,7 @@ abstract class _CertidaoControllerBase with Store {
   bool iniciou = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   void init() {
@@ -47,11 +47,11 @@ abstract class _CertidaoControllerBase with Store {
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj, page).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj, page).then((value) {
       certidaos.addAll(value);
       isLoading = false;
       iniciou = true;
-    }).onError((error, stackTrace) {
+    }).onError((dynamic error, stackTrace) {
       isLoading = false;
       iniciou = true;
       zerarCertidoes();

@@ -16,7 +16,7 @@ abstract class _ItbiControllerBase with Store {
     this.repo,
   );
 
-  int page;
+  int? page;
 
   @observable
   ObservableList<Itbi> itbis = ObservableList();
@@ -28,7 +28,7 @@ abstract class _ItbiControllerBase with Store {
   bool iniciou = false;
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @action
   void init() {
@@ -46,11 +46,11 @@ abstract class _ItbiControllerBase with Store {
   Future carregar() async {
     isLoading = true;
     user = GetIt.instance<Usuario>();
-    repo.consultarPorCPF(user.pessoa.cpfCnpj, page).then((value) {
+    repo.consultarPorCPF(user!.pessoa!.cpfCnpj, page).then((value) {
       itbis.addAll(value);
       isLoading = false;
       iniciou = true;
-    }).onError((error, stackTrace) {
+    }).onError((dynamic error, stackTrace) {
       isLoading = false;
       iniciou = true;
       zerarCertidoes();

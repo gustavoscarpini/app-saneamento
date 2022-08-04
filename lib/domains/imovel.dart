@@ -2,22 +2,22 @@ import 'package:appcontribuinte/domains/construcao.dart';
 import 'package:appcontribuinte/domains/evento.dart';
 
 class Imovel {
-  int id;
-  String inscricao;
-  String setor;
-  String quadra;
-  String lote;
-  String lograouro;
-  String bairro;
-  double areaConstruida;
-  double areaTerreno;
-  List<Evento> eventos;
-  List<String> proprietarios;
-  List<Construcao> construcoes;
-  String numero;
-  String complemento;
-  String testada;
-  String trechoLogradouro;
+  int? id;
+  String? inscricao;
+  String? setor;
+  String? quadra;
+  String? lote;
+  String? lograouro;
+  String? bairro;
+  double? areaConstruida;
+  double? areaTerreno;
+  List<Evento>? eventos;
+  List<String>? proprietarios;
+  List<Construcao>? construcoes;
+  String? numero;
+  String? complemento;
+  String? testada;
+  String? trechoLogradouro;
 
   Imovel(
       {this.id,
@@ -48,17 +48,17 @@ class Imovel {
     areaConstruida = json['areaConstruida'] != null ? json['areaConstruida'].toDouble() : 0.0;
     areaTerreno = json['areaTerreno'] != null ? json['areaTerreno'].toDouble() : 0.0;
     if (json['eventos'] != null) {
-      eventos = new List<Evento>();
+      eventos = [];
       json['eventos'].forEach((v) {
-        eventos.add(new Evento.fromJson(v));
+        eventos!.add(new Evento.fromJson(v));
       });
     }
     proprietarios = json['proprietarios'].cast<String>();
 
     if (json['construcoes'] != null) {
-      construcoes = new List<Construcao>();
+      construcoes = [];
       json['construcoes'].forEach((v) {
-        construcoes.add(new Construcao.fromJson(v));
+        construcoes!.add(new Construcao.fromJson(v));
       });
     }
     numero = json['numero'];
@@ -79,11 +79,11 @@ class Imovel {
     data['areaConstruida'] = this.areaConstruida;
     data['areaTerreno'] = this.areaTerreno;
     if (this.eventos != null) {
-      data['eventos'] = this.eventos.map((v) => v.toJson()).toList();
+      data['eventos'] = this.eventos!.map((v) => v.toJson()).toList();
     }
     data['proprietarios'] = this.proprietarios;
     if (this.construcoes != null) {
-      data['construcoes'] = this.construcoes.map((v) => v.toJson()).toList();
+      data['construcoes'] = this.construcoes!.map((v) => v.toJson()).toList();
     }
     data['numero'] = this.numero;
     data['complemento'] = this.complemento;

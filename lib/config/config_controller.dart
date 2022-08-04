@@ -13,7 +13,7 @@ abstract class _ConfigControllerBase with Store {
   _ConfigControllerBase();
 
   @computed
-  Usuario get usuario => GetIt.instance<Usuario>();
+  Usuario? get usuario => GetIt.instance<Usuario>();
 
 
 }

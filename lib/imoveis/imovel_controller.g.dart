@@ -6,10 +6,11 @@ part of 'imovel_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ImovelController on _ImovelControllerBase, Store {
-  final _$imoveisAtom = Atom(name: '_ImovelControllerBase.imoveis');
+  late final _$imoveisAtom =
+      Atom(name: '_ImovelControllerBase.imoveis', context: context);
 
   @override
   ObservableList<Imovel> get imoveis {
@@ -24,7 +25,8 @@ mixin _$ImovelController on _ImovelControllerBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_ImovelControllerBase.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_ImovelControllerBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -39,32 +41,35 @@ mixin _$ImovelController on _ImovelControllerBase, Store {
     });
   }
 
-  final _$userAtom = Atom(name: '_ImovelControllerBase.user');
+  late final _$userAtom =
+      Atom(name: '_ImovelControllerBase.user', context: context);
 
   @override
-  Usuario get user {
+  Usuario? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(Usuario value) {
+  set user(Usuario? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
   }
 
-  final _$carregarAsyncAction = AsyncAction('_ImovelControllerBase.carregar');
+  late final _$carregarAsyncAction =
+      AsyncAction('_ImovelControllerBase.carregar', context: context);
 
   @override
   Future<dynamic> carregar() {
     return _$carregarAsyncAction.run(() => super.carregar());
   }
 
-  final _$imprimirAsyncAction = AsyncAction('_ImovelControllerBase.imprimir');
+  late final _$imprimirAsyncAction =
+      AsyncAction('_ImovelControllerBase.imprimir', context: context);
 
   @override
-  Future<dynamic> imprimir(int id) {
+  Future<dynamic> imprimir(int? id) {
     return _$imprimirAsyncAction.run(() => super.imprimir(id));
   }
 

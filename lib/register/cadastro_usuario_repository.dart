@@ -7,7 +7,7 @@ class CadastroUsuarioRepository {
 
   CadastroUsuarioRepository(this._client);
 
-  Future<int> salvarCadastroUsuario(Register register) async {
+  Future<int?> salvarCadastroUsuario(Register register) async {
     try {
       print("VAI MANDARR ${register.toJson()}");
       var response =

@@ -12,7 +12,7 @@ class ItbiRepository {
 
   ItbiRepository(this._client);
 
-  Future<List<Itbi>> consultarPorCPF(String cpf, int first) async {
+  Future<List<Itbi>> consultarPorCPF(String? cpf, int? first) async {
     try {
       var response = await _client
           .get("/api/tributario/itbi/${CPFValidator.strip(cpf)}?first=$first");

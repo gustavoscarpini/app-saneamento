@@ -18,7 +18,7 @@ class EmpresaPage extends StatefulWidget {
 }
 
 class _EmpresaPageState extends State<EmpresaPage> with Disposable {
-  var empresaController = EmpresaModule.to.get<EmpresaController>();
+  var empresaController = Modular.get<EmpresaController>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -70,7 +70,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                           alignment: Alignment.topCenter,
                           padding: new EdgeInsets.only(
                               top: 10, right: 10.0, left: 10.0),
-                          child: StaggeredGridView.countBuilder(
+                          child: MasonryGridView.count(
                             crossAxisCount: 1,
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
@@ -157,7 +157,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                       .empresas[index].socios !=
                                                   null &&
                                               empresaController.empresas[index]
-                                                  .socios.isNotEmpty,
+                                                  .socios!.isNotEmpty,
                                           child: Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 10),
@@ -166,7 +166,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                 child: ListView.separated(
                                                   itemCount: empresaController
                                                       .empresas[index]
-                                                      .socios
+                                                      .socios!
                                                       .length,
                                                   shrinkWrap: true,
                                                   itemBuilder:
@@ -177,7 +177,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                               .spaceBetween,
                                                       children: <Widget>[
                                                         Text(
-                                                          "${empresaController.empresas[index].socios[index2].socio}",
+                                                          "${empresaController.empresas[index].socios![index2].socio}",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -190,7 +190,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                                           .bold),
                                                         ),
                                                         Text(
-                                                          "${empresaController.empresas[index].socios[index2].proporcao} %",
+                                                          "${empresaController.empresas[index].socios![index2].proporcao} %",
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
@@ -222,13 +222,13 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                               .empresas[index].alvaras !=
                                               null &&
                                               empresaController.empresas[index]
-                                                  .alvaras.isNotEmpty,
+                                                  .alvaras!.isNotEmpty,
                                           child: ListView.separated(
                                             itemCount:  empresaController
                                                 .empresas[index]
                                                 .alvaras == null ? 0: empresaController
                                                 .empresas[index]
-                                                .alvaras
+                                                .alvaras!
                                                 .length,
                                             shrinkWrap: true,
                                             itemBuilder:
@@ -237,7 +237,7 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                   onPressed: () {
                                                     empresaController.imprimirAlvara(empresaController
                                                         .empresas[index]
-                                                        .alvaras[index2].id);
+                                                        .alvaras![index2].id);
                                                   },
                                                   child: Row(
                                                     mainAxisAlignment:
@@ -247,9 +247,9 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                                                       Text(
                                                         "${empresaController
                                                             .empresas[index]
-                                                            .alvaras[index2].ano} - ${empresaController
+                                                            .alvaras![index2].ano} - ${empresaController
                                                             .empresas[index]
-                                                            .alvaras[index2].tipo}",
+                                                            .alvaras![index2].tipo}",
                                                         style: GoogleFonts.raleway(
                                                             fontSize: 16, color: Colors.black54),
                                                         textAlign: TextAlign.left,
@@ -303,9 +303,6 @@ class _EmpresaPageState extends State<EmpresaPage> with Disposable {
                               );
                             },
                             itemCount: empresaController.empresas.length,
-                            staggeredTileBuilder: (int index) {
-                              return StaggeredTile.fit(1);
-                            },
                           ),
                         ),
             ),

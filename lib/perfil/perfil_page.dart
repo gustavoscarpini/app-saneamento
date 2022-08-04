@@ -20,7 +20,7 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<PerfilPage> with Disposable {
-  var perfilController = PerfilModule.to.get<PerfilController>();
+  var perfilController = Modular.get<PerfilController>();
 
   @override
   void initState() {
@@ -66,15 +66,15 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                                 radius: 30,
                                 backgroundColor: Colors.white,
                                 child: perfilController.user != null &&
-                                    perfilController.user.pessoa != null &&
-                                    perfilController.user.pessoa.foto !=
+                                    perfilController.user!.pessoa != null &&
+                                    perfilController.user!.pessoa!.foto !=
                                         null &&
-                                    perfilController.user.pessoa.foto.file !=
+                                    perfilController.user!.pessoa!.foto!.file !=
                                         null
                                     ? ClipRRect(
                                   borderRadius: BorderRadius.circular(50),
                                   child: Image.file(
-                                    perfilController.user.pessoa.foto.file,
+                                    perfilController.user!.pessoa!.foto!.file!,
                                     width: 100,
                                     height: 100,
                                     fit: BoxFit.fill,
@@ -103,7 +103,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                               children: [
                                 Center(
                                   child: AutoSizeText(
-                                    "${perfilController.user.pessoa.nome}",
+                                    "${perfilController.user!.pessoa!.nome}",
                                     maxLines: 1,
                                     style: GoogleFonts.raleway(
                                         color: Colors.black87,
@@ -113,7 +113,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                                 ),
                                 Center(
                                   child: AutoSizeText(
-                                    "${perfilController.user.pessoa.email}",
+                                    "${perfilController.user!.pessoa!.email}",
                                     maxLines: 1,
                                     style: GoogleFonts.raleway(
                                         color: Colors.black54, fontSize: 16.0),
@@ -133,7 +133,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                                   children: <Widget>[
                                     Text('CPF', style: GoogleFonts.raleway()),
                                     Text(
-                                      "${perfilController.user.pessoa.cpfCnpj}",
+                                      "${perfilController.user!.pessoa!.cpfCnpj}",
                                       style: GoogleFonts.raleway(
                                           fontSize: 16, color: Colors.black54),
                                     ),
@@ -146,7 +146,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                                   children: <Widget>[
                                     Text('RG', style: GoogleFonts.raleway()),
                                     Text(
-                                      "${perfilController.user.pessoa.rgInscricao}",
+                                      "${perfilController.user!.pessoa!.rgInscricao}",
                                       style: GoogleFonts.raleway(
                                           fontSize: 16, color: Colors.black54),
                                     ),
@@ -215,7 +215,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   TextFormField(
                     controller: perfilController.passwordController,
                     validator: (value) =>
-                        value.isEmpty ? "A senha não pode ser nulo" : null,
+                        value!.isEmpty ? "A senha não pode ser nulo" : null,
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -231,7 +231,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   TextFormField(
                     controller: perfilController.newPasswordController,
                     validator: (value) =>
-                        value.isEmpty ? "A nova senha não pode ser nulo" : null,
+                        value!.isEmpty ? "A nova senha não pode ser nulo" : null,
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -246,7 +246,7 @@ class _PerfilPageState extends State<PerfilPage> with Disposable {
                   ),
                   TextFormField(
                     controller: perfilController.passwordController,
-                    validator: (value) => value.isEmpty
+                    validator: (value) => value!.isEmpty
                         ? "A senha repetida não pode ser nulo"
                         : null,
                     keyboardType: TextInputType.text,

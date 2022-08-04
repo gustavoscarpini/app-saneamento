@@ -14,13 +14,13 @@ class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase extends Disposable with Store {
   final LoginRepository repo;
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   final loginController = TextEditingController();
   final passwordController = TextEditingController();
 
   @observable
-  String userName = "";
+  String? userName = "";
 
   @observable
   bool carregando = false;
@@ -28,10 +28,10 @@ abstract class _LoginControllerBase extends Disposable with Store {
   @observable
   bool biometria = false;
 
-  Usuario usuario = Usuario();
+  Usuario? usuario = Usuario();
 
   @computed
-  bool get hasUsername => userName != null && userName.isNotEmpty;
+  bool get hasUsername => userName != null && userName!.isNotEmpty;
 
   _LoginControllerBase(this.repo) {
     carregarDadosSessao();
@@ -39,11 +39,11 @@ abstract class _LoginControllerBase extends Disposable with Store {
 
   void carregarDadosSessao() async {
     prefs = await SharedPreferences.getInstance();
-    String cpf = prefs.getString(KEY_USERLOGIN);
+    String? cpf = prefs.getString(KEY_USERLOGIN);
     if (cpf != null && cpf.isNotEmpty) {
       loginController.text = cpf;
     }
-    String bio = prefs.getString(KEY_BIOMETRIA);
+    String? bio = prefs.getString(KEY_BIOMETRIA);
     if (bio != null && bio.isNotEmpty) {
       biometria = bio.toLowerCase() == 'true';
     }
@@ -52,9 +52,9 @@ abstract class _LoginControllerBase extends Disposable with Store {
 
   @action
   void zerarUsuario() {
-    prefs.setString(KEY_USERLOGIN, null);
-    prefs.setString(KEY_USERNAME, null);
-    prefs.setString(KEY_BIOMETRIA, null);
+    prefs.setString(KEY_USERLOGIN, "");
+    prefs.setString(KEY_USERNAME, "");
+    prefs.setString(KEY_BIOMETRIA, "");
     userName = "";
     loginController.text = "";
     biometria = false;
@@ -62,7 +62,7 @@ abstract class _LoginControllerBase extends Disposable with Store {
 
   @action
   Future<bool> loginSenhaSalva() async {
-    passwordController.text = prefs.getString(KEY_PASSWORD);
+    passwordController.text = prefs.getString(KEY_PASSWORD)!;
     return login();
   }
 
@@ -77,7 +77,7 @@ abstract class _LoginControllerBase extends Disposable with Store {
       carregando = true;
       usuario = await repo.login(loginController.text, passwordController.text);
       prefs.setString(KEY_USERLOGIN, loginController.text);
-      prefs.setString(KEY_USERNAME, usuario.pessoa.nome.split(" ")[0]);
+      prefs.setString(KEY_USERNAME, usuario!.pessoa!.nome!.split(" ")[0]);
       prefs.setString(KEY_PASSWORD, passwordController.text);
       carregando = false;
       return usuario?.token != null;
@@ -89,13 +89,13 @@ abstract class _LoginControllerBase extends Disposable with Store {
     }
   }
 
-  @action
-  Future<Usuario> requestReset(String login) async {
-    carregando = true;
-    // Usuario user = await repo.fromLogin(login);
-    carregando = false;
-    // return user;
-  }
+  // @action
+  // Future<Usuario> requestReset(String login) async {
+  //   carregando = true;
+  //   Usuario user = await repo.fromLogin(login);
+  //   carregando = false;
+  //   return user;
+  // }
 
   @action
   Future resetPassordInit(String cpf) async {

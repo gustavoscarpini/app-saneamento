@@ -1,17 +1,17 @@
 class Protocolo {
-  String obs;
-  String situacao;
-  int ano;
-  int numero;
-  List<Tramites> tramites;
-  String assunto;
-  bool protocolo;
-  String cadastradoPor;
-  List<Documentos> documentos;
-  String resumo;
-  String responsavel;
-  String dataHora;
-  String requerente;
+  String? obs;
+  String? situacao;
+  int? ano;
+  int? numero;
+  List<Tramites>? tramites;
+  String? assunto;
+  bool? protocolo;
+  String? cadastradoPor;
+  List<Documentos>? documentos;
+  String? resumo;
+  String? responsavel;
+  String? dataHora;
+  String? requerente;
 
   Protocolo(
       {this.obs,
@@ -34,18 +34,18 @@ class Protocolo {
     ano = json['ano'];
     numero = json['numero'];
     if (json['tramites'] != null) {
-      tramites = new List<Tramites>();
+      tramites = [];
       json['tramites'].forEach((v) {
-        tramites.add(new Tramites.fromJson(v));
+        tramites!.add(new Tramites.fromJson(v));
       });
     }
     assunto = json['assunto'];
     protocolo = json['protocolo'];
     cadastradoPor = json['cadastradoPor'];
     if (json['documentos'] != null) {
-      documentos = new List<Documentos>();
+      documentos = [];
       json['documentos'].forEach((v) {
-        documentos.add(new Documentos.fromJson(v));
+        documentos!.add(new Documentos.fromJson(v));
       });
     }
     resumo = json['resumo'];
@@ -61,13 +61,13 @@ class Protocolo {
     data['ano'] = this.ano;
     data['numero'] = this.numero;
     if (this.tramites != null) {
-      data['tramites'] = this.tramites.map((v) => v.toJson()).toList();
+      data['tramites'] = this.tramites!.map((v) => v.toJson()).toList();
     }
     data['assunto'] = this.assunto;
     data['protocolo'] = this.protocolo;
     data['cadastradoPor'] = this.cadastradoPor;
     if (this.documentos != null) {
-      data['documentos'] = this.documentos.map((v) => v.toJson()).toList();
+      data['documentos'] = this.documentos!.map((v) => v.toJson()).toList();
     }
     data['resumo'] = this.resumo;
     data['responsavel'] = this.responsavel;
@@ -78,14 +78,14 @@ class Protocolo {
 }
 
 class Tramites {
-  String situacao;
-  String observacao;
-  String motivo;
-  int indice;
-  String origem;
-  DateTime conclusao;
-  String destino;
-  DateTime aceite;
+  String? situacao;
+  String? observacao;
+  String? motivo;
+  int? indice;
+  String? origem;
+  DateTime? conclusao;
+  String? destino;
+  DateTime? aceite;
 
   Tramites(
       {this.situacao,
@@ -123,8 +123,8 @@ class Tramites {
 }
 
 class Documentos {
-  String numero;
-  String nome;
+  String? numero;
+  String? nome;
 
   Documentos({this.numero, this.nome});
 

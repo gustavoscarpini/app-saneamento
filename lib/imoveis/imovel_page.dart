@@ -1,6 +1,4 @@
-import 'package:appcontribuinte/components/button_widget.dart';
 import 'package:appcontribuinte/components/carregando.dart';
-import 'package:appcontribuinte/components/custom_alert.dart';
 import 'package:appcontribuinte/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'imovel_controller.dart';
-import 'imovel_module.dart';
 
 class ImovelPage extends StatefulWidget {
   @override
@@ -20,7 +17,7 @@ class ImovelPage extends StatefulWidget {
 }
 
 class _ImovelPageState extends State<ImovelPage> with Disposable {
-  var imovelController = ImovelModule.to.get<ImovelController>();
+  var imovelController = Modular.get<ImovelController>();
 
   @override
   void initState() {
@@ -69,7 +66,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                           alignment: Alignment.topCenter,
                           padding: new EdgeInsets.only(
                               top: 10, right: 10.0, left: 10.0),
-                          child: StaggeredGridView.countBuilder(
+                          child: MasonryGridView.count(
                             crossAxisCount: 1,
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
@@ -292,7 +289,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                       .proprietarios !=
                                                   null &&
                                               imovelController.imoveis[index]
-                                                  .proprietarios.isNotEmpty,
+                                                  .proprietarios!.isNotEmpty,
                                           child: Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 10),
@@ -301,7 +298,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                 child: ListView.separated(
                                                   itemCount: imovelController
                                                       .imoveis[index]
-                                                      .proprietarios
+                                                      .proprietarios!
                                                       .length,
                                                   shrinkWrap: true,
                                                   itemBuilder:
@@ -315,7 +312,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                             style: GoogleFonts
                                                                 .raleway()),
                                                         Text(
-                                                          "${imovelController.imoveis[index].proprietarios[index2]}",
+                                                          "${imovelController.imoveis[index].proprietarios![index2]}",
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: GoogleFonts
@@ -346,7 +343,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                       .construcoes !=
                                                   null &&
                                               imovelController.imoveis[index]
-                                                  .construcoes.isNotEmpty,
+                                                  .construcoes!.isNotEmpty,
                                           child: Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 10),
@@ -355,7 +352,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                 child: ListView.separated(
                                                   itemCount: imovelController
                                                       .imoveis[index]
-                                                      .construcoes
+                                                      .construcoes!
                                                       .length,
                                                   shrinkWrap: true,
                                                   itemBuilder:
@@ -375,7 +372,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                                   style: GoogleFonts
                                                                       .raleway()),
                                                               Text(
-                                                                "${imovelController.imoveis[index].construcoes[index2].descricao}",
+                                                                "${imovelController.imoveis[index].construcoes![index2].descricao}",
                                                                 style: GoogleFonts.raleway(
                                                                     fontSize:
                                                                         16,
@@ -399,7 +396,7 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                                                   style: GoogleFonts
                                                                       .raleway()),
                                                               Text(
-                                                                "${imovelController.imoveis[index].construcoes[index2].area}",
+                                                                "${imovelController.imoveis[index].construcoes![index2].area}",
                                                                 style: GoogleFonts.raleway(
                                                                     fontSize:
                                                                         16,
@@ -436,17 +433,19 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                                             },
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: <Widget>[
                                                 Text(
                                                   "Imprimir",
                                                   style: GoogleFonts.raleway(
-                                                      fontSize: 16, color: Colors.black54),
+                                                      fontSize: 16,
+                                                      color: Colors.black54),
                                                   textAlign: TextAlign.left,
                                                 ),
                                                 Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   color: Colors.black54,
                                                   size: 20,
                                                 ),
@@ -459,9 +458,6 @@ class _ImovelPageState extends State<ImovelPage> with Disposable {
                               );
                             },
                             itemCount: imovelController.imoveis.length,
-                            staggeredTileBuilder: (int index) {
-                              return StaggeredTile.fit(1);
-                            },
                           ),
                         ),
             ),
