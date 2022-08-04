@@ -65,7 +65,7 @@ abstract class _DebitoControllerBase with Store {
   }
 
   @action
-  Uint8List imageFromBase64String(String base64String) {
-    return base64Decode(base64String);
+  Uint8List imageFromBase64String(String? base64String) {
+    return base64Decode(base64String!);
   }
 }

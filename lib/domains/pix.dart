@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Pix {
-  String qrCode;
-  String base64Pix;
-  String vencimento;
+  String? qrCode;
+  String? base64Pix;
+  String? vencimento;
 
   Pix({this.qrCode, this.base64Pix, this.vencimento});
 

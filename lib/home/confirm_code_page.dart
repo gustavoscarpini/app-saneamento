@@ -95,7 +95,10 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
                               padding: const EdgeInsets.all(10),
                               child: Container(
                                 child: homeController.isLoading
-                                    ? Center(child: Carregando(inverter: true,))
+                                    ? Center(
+                                        child: Carregando(
+                                        inverter: true,
+                                      ))
                                     : painelCodeDigits(context),
                               )),
                         ),
@@ -164,7 +167,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
                       CustomAlert.show(context,
                           title: "Código não confere",
                           subTitle:
-                              "O código informado não confere com o enviado, caso não o tenha recebido pressione 'Re-Enviar Código'.",
+                              "O código informado não confere com o enviado, caso não o tenha recebido pressione 'Enviar Novo Código'.",
                           style: AlertStyle.error);
                     }
                   });
@@ -176,11 +179,15 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with Disposable {
               height: 50,
             ),
             TextButton(
-                child: Text("Re-Enviar Código",
+                child: Text("Enviar Novo Código",
                     style: GoogleFonts.raleway(
                         fontWeight: FontWeight.bold, color: Colors.blueAccent)),
                 onPressed: () async {
-                  print("TCHUBIRUBA CARA");
+                  homeController.solicitarAcessoAoDispositivo().then((value) {
+                    setState(() {
+                      //so p recarregar
+                    });
+                  });
                 }),
           ],
         ));
